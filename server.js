@@ -137,6 +137,9 @@ async function handleChat(request, response) {
 
 const server = http.createServer(async (request, response) => {
   const requestUrl = new URL(request.url, 'http://localhost');
+  if (requestUrl.pathname === '/healthz' && request.method === 'GET') {
+    return sendJson(response, 200, { ok: true });
+  }
   if (requestUrl.pathname === '/api/chat') {
     return handleChat(request, response);
   }
