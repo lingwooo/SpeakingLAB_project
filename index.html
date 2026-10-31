@@ -1,1859 +1,1098 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>IELTS Speaking Research Lab</title>
-
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Inter,Segoe UI,Arial,sans-serif;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    background:#07111f;
-    color:#eef6ff;
-    overflow-x:hidden;
-}
-
-/* BACKGROUND */
-
-body:before{
-    content:"";
-    position:fixed;
-    inset:0;
-    background:
-        radial-gradient(circle at 10% 20%,rgba(0,183,255,.12),transparent 30%),
-        radial-gradient(circle at 90% 10%,rgba(125,80,255,.12),transparent 30%),
-        radial-gradient(circle at 50% 90%,rgba(0,255,180,.07),transparent 30%);
-    pointer-events:none;
-    z-index:-1;
-}
-
-/* NAVBAR */
-
-nav{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:70px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 7%;
-    background:rgba(7,17,31,.75);
-    backdrop-filter:blur(15px);
-    border-bottom:1px solid rgba(255,255,255,.08);
-    z-index:1000;
-}
-
-.logo{
-    font-weight:800;
-    font-size:20px;
-}
-
-.logo span{
-    color:#38bdf8;
-}
-
-nav ul{
-    display:flex;
-    gap:28px;
-    list-style:none;
-}
-
-nav a{
-    color:#b9c9dc;
-    text-decoration:none;
-    font-size:14px;
-    transition:.2s;
-}
-
-nav a:hover{
-    color:#38bdf8;
-}
-
-/* HERO */
-
-.hero{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:120px 7% 70px;
-}
-
-.hero-content{
-    max-width:1000px;
-}
-
-.photo-strip{
-    max-width:980px;
-    margin:42px auto 0;
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:14px;
-}
-
-.photo-card{
-    position:relative;
-    min-height:150px;
-    overflow:hidden;
-    border:1px solid rgba(255,255,255,.12);
-    border-radius:18px;
-    background:#132238;
-}
-
-.photo-card img{
-    width:100%;
-    height:100%;
-    min-height:150px;
-    object-fit:cover;
-    display:block;
-    opacity:.78;
-    transition:transform .5s ease,opacity .3s ease;
-}
-
-.photo-card:hover img{transform:scale(1.04);opacity:1}
-
-.photo-card span{
-    position:absolute;
-    left:12px;
-    bottom:12px;
-    padding:7px 10px;
-    border-radius:9px;
-    background:rgba(5,12,22,.78);
-    color:#eff8ff;
-    font-size:12px;
-    font-weight:700;
-}
-
-/* Warm palette and a little personality for the coach */
-body{background:linear-gradient(145deg,#201716 0%,#2b1e1a 48%,#211817 100%);background-attachment:fixed;color:#fff7ef}
-body:before{background:radial-gradient(ellipse 48% 34% at 8% 8%,rgba(238,153,94,.2),transparent 72%),radial-gradient(ellipse 42% 38% at 96% 36%,rgba(184,105,78,.18),transparent 72%),radial-gradient(ellipse 54% 30% at 47% 100%,rgba(215,177,116,.14),transparent 74%),linear-gradient(180deg,rgba(255,229,202,.025),transparent 42%)}
-body:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background-image:radial-gradient(rgba(255,225,198,.12) .7px,transparent .7px);background-size:34px 34px;mask-image:radial-gradient(ellipse at center,black 8%,transparent 88%);opacity:.28}
-nav{background:rgba(33,24,23,.88);border-color:rgba(255,221,191,.11)}
-.logo span,.gradient{color:#f1ae73}
-.gradient{background:linear-gradient(90deg,#f4bd82,#e58b67,#d9b875);-webkit-background-clip:text}
-.primary{background:#c96f4b;color:#fff9f2}
-.primary:hover{box-shadow:0 10px 30px rgba(201,111,75,.3)}
-.secondary{background:#382722;border-color:#654638;color:#ffe7d1}
-.card,.feature,.experiment-box,.chart-box,.practice-card{background:rgba(54,38,33,.88);border-color:#63483b}
-.strategy,.step{background:#382824;border-color:#604336}
-.app-section{background:linear-gradient(180deg,transparent,rgba(201,111,75,.08))}
-.chat-container{background:#342522;border-color:#674b3e;box-shadow:0 20px 60px rgba(17,9,7,.4)}
-.chat-header,.chat-input-area{background:#261b19}
-.chat-messages{background:#30221f}
-.ai-msg{background:#4b352d;color:#fff3e8}
-.user-msg{background:#b96243;color:#fff9f3}
-.quick-actions,.voice-tools{background:#291d1a}
-.quick-btn,.voice-btn,.level-btn{background:#49342c;color:#ffdbba;border-color:#76523f}
-.chat-input,.answer-area{background:#402e28;border-color:#725343;color:#fff7ef}
-.chat-input::placeholder,.answer-area::placeholder{color:#c6aa98}
-.avatar{background:linear-gradient(135deg,#e69a67,#a95d4d);box-shadow:0 0 0 5px rgba(230,154,103,.12);animation:botFloat 3s ease-in-out infinite}
-.avatar:after{content:"";position:absolute;width:10px;height:10px;margin:36px 0 0 35px;background:#a9c18d;border:2px solid #30221f;border-radius:50%;animation:statusPulse 1.8s ease-in-out infinite}
-.avatar{overflow:visible}
-.bot-antenna{position:absolute;top:-5px;left:21px;width:3px;height:9px;border-radius:4px;background:#ffe2bd}
-.bot-antenna:before{content:"";position:absolute;top:-3px;left:-2px;width:7px;height:7px;border-radius:50%;background:#f3c579}
-.bot-face{position:relative;width:29px;height:25px;margin-top:5px;border-radius:9px 9px 11px 11px;background:#fff0d9;box-shadow:inset 0 -3px 0 #e8cbaa}
-.bot-eyes{position:absolute;top:8px;left:6px;right:6px;display:flex;justify-content:space-between}
-.bot-eyes i{width:4px;height:5px;border-radius:50%;background:#684338;animation:botBlink 4s infinite}
-.bot-smile{position:absolute;left:10px;top:16px;width:9px;height:4px;border-bottom:1.5px solid #bd7057;border-radius:0 0 8px 8px}
-.status-dot{background:#a9c18d;box-shadow:0 0 0 4px rgba(169,193,141,.13);animation:statusPulse 1.8s ease-in-out infinite}
-.photo-card{border-color:rgba(255,221,191,.2)}
-.photo-card span{background:rgba(35,24,20,.82)}
-.level-card{background:#453126;border-color:#9b6548;color:#ffead7}
-.hero p,.card p,.strategy p,.step p,.experiment-box>p,.app-info p,.feature small,.header-info p,.legend,.chart-box p,.conclusion-box p,.section-title p,.voice-note,footer{color:#d1b9a7}
-.dot.gray{background:#8f7868}.dot.blue{background:#e69a67}
-.badge{border-color:rgba(230,154,103,.35);background:rgba(230,154,103,.12);color:#ffd1a8}
-.strategy-number,.strategy-tag{color:#f2b77f}
-.strategy-tag{background:#4a3329}
-.voice-btn:disabled{opacity:.6;cursor:wait}
-.bar-label{color:#e2c8b4}
-@keyframes botFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-5px) rotate(2deg)}}
-@keyframes botBlink{0%,46%,50%,100%{transform:scaleY(1)}48%{transform:scaleY(.15)}}
-@keyframes statusPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.62;transform:scale(.82)}}
-
-.typing-indicator{display:flex;align-items:center;gap:5px;width:max-content;padding:14px 16px}
-.typing-indicator i{width:6px;height:6px;border-radius:50%;background:#f0b27e;animation:typingBounce .75s infinite alternate}
-.typing-indicator i:nth-child(2){animation-delay:.18s}.typing-indicator i:nth-child(3){animation-delay:.36s}
-@keyframes typingBounce{to{opacity:.35;transform:translateY(-4px)}}
-
-.line-chart{display:block;width:100%;height:auto;margin-top:20px;overflow:visible}
-.line-chart .grid-line{stroke:#684d40;stroke-width:1;stroke-dasharray:4 6}
-.line-chart .axis{stroke:#a18470;stroke-width:1.5}
-.line-chart .line-shadow{stroke:#e89b68}.line-chart .line-coach{stroke:#a9c18d}.line-chart .line-group{stroke:#d6b776}.line-chart .line-self{stroke:#d48383}
-.line-chart .series{fill:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
-.line-chart .point{stroke:#30221f;stroke-width:3}
-.line-chart text{fill:#e4ccba;font:12px Inter,Segoe UI,Arial,sans-serif}
-.line-legend{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:10px;color:#e0c7b4;font-size:12px}
-.line-legend span:before{content:"";width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:6px;background:var(--legend-color)}
-
-.badge{
-    display:inline-block;
-    padding:8px 15px;
-    border:1px solid rgba(56,189,248,.3);
-    background:rgba(56,189,248,.08);
-    color:#38bdf8;
-    border-radius:30px;
-    font-size:13px;
-    margin-bottom:25px;
-}
-
-.hero h1{
-    font-size:clamp(42px,7vw,78px);
-    line-height:1.05;
-    margin-bottom:25px;
-}
-
-.gradient{
-    background:linear-gradient(90deg,#38bdf8,#8b5cf6,#22c55e);
-    -webkit-background-clip:text;
-    color:transparent;
-}
-
-.hero p{
-    max-width:760px;
-    margin:auto;
-    color:#9fb0c5;
-    font-size:18px;
-    line-height:1.7;
-}
-
-.hero-buttons{
-    margin-top:35px;
-    display:flex;
-    justify-content:center;
-    gap:15px;
-    flex-wrap:wrap;
-}
-
-.btn{
-    padding:14px 24px;
-    border-radius:12px;
-    border:none;
-    cursor:pointer;
-    text-decoration:none;
-    font-weight:700;
-    transition:.25s;
-}
-
-.primary{
-    background:#0ea5e9;
-    color:white;
-}
-
-.primary:hover{
-    transform:translateY(-3px);
-    box-shadow:0 10px 30px rgba(14,165,233,.25);
-}
-
-.secondary{
-    border:1px solid #334155;
-    color:#dbeafe;
-    background:#111d2e;
-}
-
-/* SECTIONS */
-
-section{
-    padding:100px 7%;
-}
-
-.section-title{
-    text-align:center;
-    margin-bottom:55px;
-}
-
-.section-title h2{
-    font-size:42px;
-    margin-bottom:12px;
-}
-
-.section-title p{
-    color:#91a4b9;
-}
-
-/* RESEARCH */
-
-.research-grid{
-    max-width:1100px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-}
-
-.card{
-    background:rgba(15,29,48,.8);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:20px;
-    padding:28px;
-    transition:.3s;
-}
-
-.card:hover{
-    transform:translateY(-6px);
-    border-color:rgba(56,189,248,.35);
-}
-
-.card-icon{
-    font-size:35px;
-    margin-bottom:18px;
-}
-
-.card h3{
-    margin-bottom:10px;
-}
-
-.card p{
-    color:#91a4b9;
-    line-height:1.6;
-}
-
-/* STRATEGIES */
-
-.strategies{
-    max-width:1200px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:18px;
-}
-
-.strategy{
-    padding:25px;
-    min-height:230px;
-    border-radius:20px;
-    background:#0e1c2e;
-    border:1px solid #23344a;
-    position:relative;
-    overflow:hidden;
-}
-
-.strategy:after{
-    content:"";
-    position:absolute;
-    width:120px;
-    height:120px;
-    right:-50px;
-    top:-50px;
-    border-radius:50%;
-    background:rgba(56,189,248,.1);
-}
-
-.strategy-number{
-    font-size:12px;
-    color:#38bdf8;
-    font-weight:800;
-}
-
-.strategy h3{
-    margin:15px 0 10px;
-    font-size:21px;
-}
-
-.strategy p{
-    color:#94a8bd;
-    line-height:1.6;
-}
-
-.strategy-tag{
-    display:inline-block;
-    margin-top:20px;
-    padding:6px 10px;
-    background:#16283e;
-    border-radius:8px;
-    color:#7dd3fc;
-    font-size:12px;
-}
-
-/* EXPERIMENT */
-
-.experiment{
-    max-width:1100px;
-    margin:auto;
-}
-
-.experiment-box{
-    background:#0d1a2b;
-    border:1px solid #263b52;
-    border-radius:24px;
-    padding:35px;
-}
-
-.steps{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
-    margin-top:30px;
-}
-
-.step{
-    padding:20px;
-    background:#142337;
-    border-radius:15px;
-    text-align:center;
-}
-
-.step span{
-    display:block;
-    font-size:28px;
-    margin-bottom:10px;
-}
-
-.step p{
-    color:#9cafc4;
-    font-size:14px;
-}
-
-/* CHART */
-
-.chart-box{
-    max-width:950px;
-    margin:50px auto 0;
-    background:#0c1929;
-    padding:30px;
-    border-radius:22px;
-    border:1px solid #26384d;
-}
-
-.chart{
-    height:330px;
-    display:flex;
-    align-items:end;
-    justify-content:space-around;
-    gap:25px;
-    padding:30px 20px 45px;
-    position:relative;
-}
-
-.chart:before{
-    content:"";
-    position:absolute;
-    left:50px;
-    right:20px;
-    top:50%;
-    border-top:1px dashed #334155;
-}
-
-.bar-group{
-    height:100%;
-    display:flex;
-    align-items:end;
-    gap:8px;
-    position:relative;
-    width:130px;
-}
-
-.bar{
-    width:45px;
-    border-radius:8px 8px 0 0;
-    position:relative;
-    transition:1s;
-}
-
-.before{
-    height:45%;
-    background:#475569;
-}
-
-.after{
-    height:75%;
-    background:#0ea5e9;
-}
-
-.bar-label{
-    position:absolute;
-    bottom:-35px;
-    width:100%;
-    text-align:center;
-    color:#94a3b8;
-    font-size:12px;
-}
-
-.legend{
-    display:flex;
-    justify-content:center;
-    gap:25px;
-    margin-top:20px;
-    color:#9cafc4;
-    font-size:13px;
-}
-
-.dot{
-    width:10px;
-    height:10px;
-    display:inline-block;
-    border-radius:50%;
-    margin-right:6px;
-}
-
-.dot.gray{background:#475569}
-.dot.blue{background:#0ea5e9}
-
-/* APP */
-
-.app-section{
-    background:linear-gradient(180deg,transparent,rgba(14,165,233,.04));
-}
-
-.app-layout{
-    max-width:1100px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:1fr 420px;
-    gap:35px;
-    align-items:center;
-}
-
-.app-info h2{
-    font-size:45px;
-    margin-bottom:20px;
-}
-
-.app-info p{
-    color:#9cafc4;
-    line-height:1.7;
-    margin-bottom:25px;
-}
-
-.features{
-    display:grid;
-    gap:12px;
-}
-
-.feature{
-    padding:15px;
-    border-radius:12px;
-    background:#0e1c2e;
-    border:1px solid #23344a;
-}
-
-/* CHAT */
-
-.chat-container{
-    width:100%;
-    height:620px;
-    background:#172235;
-    border-radius:22px;
-    box-shadow:0 20px 60px rgba(0,0,0,.4);
-    display:flex;
-    flex-direction:column;
-    overflow:hidden;
-    border:1px solid #334155;
-}
-
-.chat-header{
-    background:#0c1625;
-    padding:16px;
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.avatar{
-    width:45px;
-    height:45px;
-    background:linear-gradient(135deg,#0284c7,#7c3aed);
-    border-radius:50%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:22px;
-    position:relative;
-}
-
-.header-info h3{
-    font-size:16px;
-}
-
-.header-info p{
-    font-size:11px;
-    color:#38bdf8;
-    margin-top:3px;
-}
-
-.status-dot{
-    width:7px;
-    height:7px;
-    display:inline-block;
-    border-radius:50%;
-    background:#22c55e;
-}
-
-/* CHAT MESSAGES */
-
-.chat-messages{
-    flex-grow:1;
-    padding:16px;
-    overflow-y:auto;
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-}
-
-.message{
-    max-width:84%;
-    padding:12px 15px;
-    border-radius:14px;
-    font-size:13px;
-    line-height:1.5;
-    white-space:pre-line;
-}
-
-.ai-msg{
-    background:#29384c;
-    align-self:flex-start;
-    border-bottom-left-radius:3px;
-}
-
-.user-msg{
-    background:#0284c7;
-    align-self:flex-end;
-    border-bottom-right-radius:3px;
-}
-
-.typing{
-    opacity:.7;
-    font-style:italic;
-}
-
-/* QUICK */
-
-.quick-actions{
-    padding:8px;
-    background:#101b2b;
-    display:flex;
-    gap:6px;
-    overflow-x:auto;
-}
-
-.quick-btn{
-    background:#25354a;
-    color:#7dd3fc;
-    border:1px solid #3a4d64;
-    padding:7px 10px;
-    border-radius:20px;
-    font-size:10px;
-    cursor:pointer;
-    white-space:nowrap;
-}
-
-.chat-input-area{
-    padding:10px;
-    background:#0c1625;
-    display:flex;
-    gap:8px;
-}
-
-.voice-tools{
-    padding:10px 12px;
-    background:#101b2b;
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-    border-top:1px solid rgba(255,255,255,.05);
-}
-
-.voice-btn,.level-btn{
-    border:1px solid #3a4d64;
-    background:#1b2b40;
-    color:#d9efff;
-    border-radius:10px;
-    padding:9px 12px;
-    cursor:pointer;
-    font-weight:700;
-    font-size:12px;
-}
-
-.voice-btn:hover,.level-btn:hover{border-color:#38bdf8;background:#203750}
-.voice-btn.listening{background:#9f1239;border-color:#fb7185;animation:pulse 1.2s infinite}
-.voice-note{color:#91a4b9;font-size:11px;align-self:center;margin-left:auto}
-
-@keyframes pulse{50%{box-shadow:0 0 0 5px rgba(251,113,133,.15)}}
-
-.level-card{
-    margin:10px 16px 0;
-    padding:12px;
-    background:#10283b;
-    border:1px solid #23506d;
-    border-radius:13px;
-    color:#cdeeff;
-    font-size:12px;
-    line-height:1.5;
-}
-
-.chat-input{
-    flex-grow:1;
-    background:#27374b;
-    border:1px solid #3d5068;
-    padding:11px;
-    border-radius:10px;
-    color:white;
-    outline:none;
-}
-
-.send-btn{
-    width:45px;
-    border:none;
-    border-radius:10px;
-    background:#0284c7;
-    color:white;
-    cursor:pointer;
-}
-
-/* PRACTICE */
-
-.practice{
-    max-width:1000px;
-    margin:auto;
-    text-align:center;
-}
-
-.practice-card{
-    background:#0e1c2e;
-    padding:35px;
-    border-radius:22px;
-    border:1px solid #263b52;
-}
-
-.question{
-    font-size:25px;
-    margin:20px 0;
-}
-
-.answer-area{
-    width:100%;
-    min-height:130px;
-    background:#111f31;
-    border:1px solid #34495f;
-    border-radius:12px;
-    padding:15px;
-    color:white;
-    resize:vertical;
-    outline:none;
-}
-
-.evaluate{
-    margin-top:15px;
-}
-
-/* CONCLUSION */
-
-.conclusion{
-    max-width:850px;
-    margin:auto;
-    text-align:center;
-}
-
-.conclusion-box{
-    padding:40px;
-    background:linear-gradient(135deg,#0e2238,#151d38);
-    border:1px solid #334155;
-    border-radius:25px;
-}
-
-.conclusion-box p{
-    color:#a8b8ca;
-    line-height:1.8;
-}
-
-/* FOOTER */
-
-footer{
-    text-align:center;
-    padding:40px;
-    color:#60758c;
-    border-top:1px solid #17283b;
-}
-
-/* RESPONSIVE */
-
-@media(max-width:900px){
-    .research-grid{
-        grid-template-columns:1fr;
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5ef">
+  <meta name="description" content="A student research project exploring teenagers' IELTS Speaking difficulties, learning preferences, confidence, and four speaking practice strategies.">
+  <title>SpeakUp Research — IELTS Speaking</title>
+  <script>document.documentElement.classList.add('js');</script>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f6f5ef;
+      --surface: #fffefa;
+      --ink: #202d2b;
+      --muted: #626e6a;
+      --line: #e2e3da;
+      --green: #285d52;
+      --green-dark: #19463f;
+      --green-soft: #e8f0e9;
+      --coral: #da765c;
+      --yellow: #edc674;
+      --shadow: 0 24px 70px rgba(28, 46, 41, .09);
+      --content: 1160px;
     }
 
-    .strategies{
-        grid-template-columns:1fr 1fr;
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; }
+    a { color: inherit; }
+    button, textarea { font: inherit; }
+    button:focus-visible, a:focus-visible, textarea:focus-visible {
+      outline: 3px solid #df9f50;
+      outline-offset: 3px;
     }
 
-    .app-layout{
-        grid-template-columns:1fr;
+    .skip-link {
+      position: fixed;
+      z-index: 20;
+      top: 10px;
+      left: 10px;
+      padding: 10px 14px;
+      transform: translateY(-160%);
+      border-radius: 8px;
+      background: var(--ink);
+      color: white;
+    }
+    .skip-link:focus { transform: translateY(0); }
+    .container { width: min(var(--content), calc(100% - 48px)); margin-inline: auto; }
+
+    .topbar {
+      position: sticky;
+      z-index: 10;
+      top: 0;
+      border-bottom: 1px solid rgba(32, 45, 43, .08);
+      background: rgba(246, 245, 239, .92);
+      backdrop-filter: blur(16px);
+    }
+    .nav-wrap {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -.04em;
+    }
+    .brand-mark {
+      display: grid;
+      width: 36px;
+      height: 36px;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--green);
+      color: white;
+      font-family: Georgia, serif;
+      font-size: 21px;
+      font-weight: 700;
+      font-style: italic;
+    }
+    .brand small {
+      display: block;
+      margin-top: -4px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 650;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: clamp(14px, 2.3vw, 30px);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .nav-links a {
+      color: #465450;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 650;
+      transition: color .2s ease;
+    }
+    .nav-links a:hover { color: var(--green); }
+    .nav-cta {
+      padding: 10px 16px;
+      border: 1px solid rgba(40, 93, 82, .18);
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--green) !important;
+    }
+    .menu-toggle {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+      color: var(--ink);
+      cursor: pointer;
+      font-size: 20px;
     }
 
-    .steps{
-        grid-template-columns:1fr 1fr;
+    .hero { padding: 64px 0 82px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .96fr) minmax(390px, 1.04fr);
+      align-items: center;
+      gap: clamp(42px, 7vw, 96px);
     }
-}
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 20px;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      width: 24px;
+      height: 2px;
+      background: var(--coral);
+      content: "";
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { text-wrap: balance; }
+    h1 {
+      max-width: 650px;
+      margin-bottom: 22px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(44px, 6.2vw, 78px);
+      font-weight: 500;
+      letter-spacing: -.055em;
+      line-height: .99;
+    }
+    h1 em { color: var(--green); font-weight: 500; }
+    .hero-copy {
+      max-width: 550px;
+      margin-bottom: 26px;
+      color: #596661;
+      font-size: clamp(16px, 1.5vw, 18px);
+      line-height: 1.75;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 28px 0 34px; }
+    .button {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 19px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 750;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary { background: var(--green); color: white; box-shadow: 0 8px 18px rgba(40, 93, 82, .16); }
+    .button-primary:hover { background: var(--green-dark); box-shadow: 0 12px 25px rgba(40, 93, 82, .22); }
+    .button-secondary { border-color: #d7ddd4; background: rgba(255, 254, 250, .65); color: var(--ink); }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 24px; color: #68736f; font-size: 12px; }
+    .hero-meta strong { display: block; color: var(--ink); font-size: 19px; font-weight: 750; letter-spacing: -.04em; }
+    .hero-meta span { display: block; }
+    .hero-meta .meta-item { padding-left: 14px; border-left: 1px solid #d5d9d0; }
+    .hero-meta .meta-item:first-child { padding-left: 0; border-left: 0; }
 
-@media(max-width:600px){
-    nav ul{
-        display:none;
+    .hero-visual { position: relative; min-height: 520px; }
+    .hero-photo {
+      position: absolute;
+      inset: 0 16px 22px 40px;
+      margin: 0;
+      overflow: hidden;
+      border-radius: 48% 48% 22px 22px / 36% 36% 22px 22px;
+      background: #d3ddd4;
+      box-shadow: var(--shadow);
+    }
+    .hero-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; display: block; }
+    .hero-photo::after {
+      position: absolute;
+      inset: 38% 0 0;
+      background: linear-gradient(180deg, transparent, rgba(22, 40, 35, .38));
+      content: "";
+      pointer-events: none;
+    }
+    .photo-caption {
+      position: absolute;
+      z-index: 1;
+      right: 34px;
+      bottom: 38px;
+      left: 62px;
+      color: rgba(255, 255, 255, .92);
+      font-size: 11px;
+      text-shadow: 0 1px 7px rgba(0,0,0,.3);
+    }
+    .photo-caption a { text-underline-offset: 2px; }
+    .floating-note {
+      position: absolute;
+      z-index: 2;
+      right: -2px;
+      bottom: 3px;
+      width: min(235px, 54%);
+      padding: 19px 20px;
+      transform: rotate(2deg);
+      border: 1px solid rgba(40, 93, 82, .08);
+      border-radius: 15px;
+      background: var(--surface);
+      box-shadow: 0 14px 36px rgba(30, 49, 43, .14);
+    }
+    .floating-note span { display: block; margin-bottom: 6px; color: var(--green); font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .floating-note strong { display: block; font-family: Georgia, serif; font-size: 17px; font-weight: 500; line-height: 1.28; }
+    .sunburst {
+      position: absolute;
+      z-index: -1;
+      top: 5px;
+      right: -12px;
+      width: 106px;
+      height: 106px;
+      border: 1px solid #d7bd82;
+      border-radius: 50%;
+      background: repeating-conic-gradient(from 4deg, transparent 0 9deg, rgba(217, 184, 111, .32) 9deg 10deg);
+      mask-image: radial-gradient(circle, transparent 0 44%, #000 46%);
     }
 
-    section{
-        padding:70px 5%;
+    .section { padding: 92px 0; }
+    .section-white { background: var(--surface); }
+    .section-green { background: var(--green-dark); color: white; }
+    .section-head { max-width: 720px; margin-bottom: 42px; }
+    .section-head.center { margin-inline: auto; text-align: center; }
+    .kicker { margin-bottom: 12px; color: var(--coral); font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    .section-green .kicker { color: #efc778; }
+    h2 {
+      margin-bottom: 14px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(34px, 4.7vw, 52px);
+      font-weight: 500;
+      letter-spacing: -.045em;
+      line-height: 1.08;
     }
-
-    .strategies{
-        grid-template-columns:1fr;
+    .section-lead { max-width: 690px; margin-bottom: 0; color: var(--muted); font-size: 16px; line-height: 1.75; }
+    .section-green .section-lead { color: #d6e2da; }
+    .aim-layout { display: grid; grid-template-columns: 1.1fr .9fr; gap: 64px; align-items: center; }
+    .aim-statement { max-width: 720px; color: #43504c; font-size: clamp(19px, 2.4vw, 25px); line-height: 1.58; }
+    .aim-statement strong { color: var(--green-dark); font-weight: 700; }
+    .aim-note {
+      padding: 30px;
+      border: 1px solid #dde4d9;
+      border-radius: 18px;
+      background: #f3f6f0;
     }
+    .aim-note h3 { margin-bottom: 12px; font-family: Georgia, serif; font-size: 21px; font-weight: 500; }
+    .aim-note p { margin-bottom: 0; color: #586761; font-size: 14px; }
+    .topic-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+    .topic-pills span { padding: 6px 11px; border: 1px solid #d7e0d5; border-radius: 999px; background: white; color: #465a52; font-size: 11px; font-weight: 700; }
 
-    .steps{
-        grid-template-columns:1fr;
+    .method-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 34px; }
+    .method-card {
+      min-height: 200px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: white;
     }
-
-    .chat-container{
-        height:580px;
+    .method-card .index { display: inline-block; margin-bottom: 17px; color: var(--coral); font-family: Georgia, serif; font-size: 17px; font-style: italic; }
+    .method-card h3 { margin-bottom: 9px; font-size: 16px; letter-spacing: -.02em; }
+    .method-card p { margin-bottom: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+    .scope-note {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin-top: 18px;
+      padding: 20px 22px;
+      border-left: 3px solid var(--yellow);
+      border-radius: 0 12px 12px 0;
+      background: #f6f4eb;
+      color: #58635f;
+      font-size: 12px;
     }
+    .scope-note strong { display: block; margin-bottom: 4px; color: var(--ink); font-size: 12px; }
+    .scope-note p { margin: 0; }
 
-    .photo-strip{grid-template-columns:1fr 1fr}
-    .photo-card:first-child{grid-column:span 2}
-    .photo-card,.photo-card img{min-height:125px}
-}
+    .results-head { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 36px; }
+    .results-head .section-head { margin: 0; }
+    .sample-badge {
+      flex: 0 0 auto;
+      min-width: 156px;
+      padding: 14px 20px;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 15px;
+      background: rgba(255,255,255,.08);
+      text-align: center;
+    }
+    .sample-badge strong { display: block; color: #f2d08a; font-family: Georgia, serif; font-size: 34px; font-weight: 500; line-height: 1.1; }
+    .sample-badge span { color: #e2ece5; font-size: 11px; }
+    .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+    .result-card {
+      position: relative;
+      min-height: 235px;
+      overflow: hidden;
+      padding: 25px;
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 16px;
+      background: rgba(255,255,255,.08);
+    }
+    .result-card::after {
+      position: absolute;
+      top: -40px;
+      right: -35px;
+      width: 110px;
+      height: 110px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 50%;
+      content: "";
+    }
+    .result-icon { display: grid; width: 42px; height: 42px; margin-bottom: 26px; place-items: center; border-radius: 13px; background: rgba(242, 208, 138, .15); color: #f2d08a; font-size: 19px; }
+    .result-card h3 { margin-bottom: 8px; color: white; font-family: Georgia, serif; font-size: 23px; font-weight: 500; }
+    .result-card p { max-width: 260px; margin-bottom: 0; color: #d3e0d8; font-size: 13px; line-height: 1.6; }
+    .result-footnote { margin: 18px 0 0; color: #c4d6cb; font-size: 12px; }
 
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
-.part1-btn{background:#a9573e;border-color:#d08a63;color:#fff5e9}
-.part1-btn.active{background:#704537}
+    .analysis-grid { display: grid; grid-template-columns: .95fr 1.05fr; align-items: center; gap: clamp(40px, 8vw, 100px); }
+    .analysis-photo { position: relative; min-height: 420px; margin: 0; overflow: hidden; border-radius: 18px 18px 18px 72px; background: #d5ded8; }
+    .analysis-photo img { display: block; width: 100%; height: 420px; object-fit: cover; object-position: center; }
+    .analysis-photo figcaption { position: absolute; right: 14px; bottom: 13px; left: 14px; color: white; font-size: 10px; text-shadow: 0 1px 7px rgba(0,0,0,.55); }
+    .analysis-photo figcaption a { text-underline-offset: 2px; }
+    .analysis-copy p { color: #596661; }
+    .analysis-callout { margin-top: 22px; padding: 18px 20px; border-left: 3px solid var(--coral); border-radius: 0 11px 11px 0; background: #f3f0e7; color: #43504b; font-size: 13px; }
+    .analysis-callout strong { display: block; margin-bottom: 4px; color: var(--ink); }
 
-/* Final warm-theme layer: keep original component rules from restoring the cool palette. */
-.logo span{color:#f1ae73}
-.gradient{background:linear-gradient(90deg,#f4bd82,#e58b67,#d9b875);-webkit-background-clip:text;background-clip:text;color:transparent}
-.primary{background:#c96f4b;color:#fff9f2}
-.primary:hover{box-shadow:0 10px 30px rgba(201,111,75,.3)}
-.secondary{background:#382722;border-color:#654638;color:#ffe7d1}
-.badge{border-color:rgba(230,154,103,.35);background:rgba(230,154,103,.12);color:#ffd1a8}
-.card,.feature,.experiment-box,.chart-box,.practice-card{background:rgba(54,38,33,.9);border-color:#63483b}
-.strategy,.step{background:#382824;border-color:#604336}
-.app-section{background:linear-gradient(180deg,transparent,rgba(201,111,75,.08))}
-.chat-container{background:#342522;border-color:#674b3e;box-shadow:0 20px 60px rgba(17,9,7,.4)}
-.chat-header,.chat-input-area{background:#261b19}
-.chat-messages{background:#30221f}
-.ai-msg{background:#4b352d;color:#fff3e8}
-.user-msg{background:#b96243;color:#fff9f3}
-.quick-actions,.voice-tools{background:#291d1a}
-.quick-btn,.voice-btn,.level-btn{background:#49342c;color:#ffdbba;border-color:#76523f}
-.part1-btn{background:#a9573e;border-color:#d08a63;color:#fff5e9}
-.part1-btn.active{background:#704537}
-.chat-input,.answer-area{background:#402e28;border-color:#725343;color:#fff7ef}
-.chat-input::placeholder,.answer-area::placeholder{color:#c6aa98}
-.avatar{background:linear-gradient(135deg,#e69a67,#a95d4d);box-shadow:0 0 0 5px rgba(230,154,103,.12);animation:botFloat 3s ease-in-out infinite}
-.status-dot{background:#a9c18d;box-shadow:0 0 0 4px rgba(169,193,141,.13);animation:statusPulse 1.8s ease-in-out infinite}
-.header-info p,.voice-note,.hero p,.card p,.strategy p,.step p,.experiment-box>p,.app-info p,.feature small,.legend,.chart-box p,.conclusion-box p,.section-title p,footer{color:#d1b9a7}
-.strategy-number,.strategy-tag{color:#f2b77f}
-.strategy-tag{background:#4a3329}
-.bar-label{color:#e2c8b4}
-.dot.gray{background:#8f7868}.dot.blue{background:#e69a67}
-</style>
+    .strategy-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .strategy-card {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 17px;
+      min-height: 180px;
+      padding: 25px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 16px;
+      background: rgba(255,255,255,.075);
+      transition: transform .22s ease, background .22s ease;
+    }
+    .strategy-card:hover { transform: translateY(-3px); background: rgba(255,255,255,.11); }
+    .strategy-number { display: grid; width: 48px; height: 48px; place-items: center; border: 1px solid rgba(237,198,116,.45); border-radius: 15px; color: #f0ce84; font-family: Georgia, serif; font-size: 21px; }
+    .strategy-card h3 { margin: 1px 0 8px; color: white; font-family: Georgia, serif; font-size: 22px; font-weight: 500; }
+    .strategy-card p { margin-bottom: 0; color: #d6e2da; font-size: 13px; line-height: 1.65; }
+    .strategy-label { display: block; margin-top: 12px; color: #f0ce84; font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .strategy-note { margin: 21px 0 0; color: #d0dfd5; font-size: 12px; }
+
+    .practice-section { padding-block: 90px; }
+    .practice-grid { display: grid; grid-template-columns: .8fr 1.2fr; align-items: center; gap: 70px; }
+    .practice-copy p { color: var(--muted); }
+    .practice-copy .small-note { margin-top: 18px; color: #77827c; font-size: 11px; }
+    .practice-card {
+      padding: clamp(24px, 4vw, 38px);
+      border: 1px solid #e4e2d8;
+      border-radius: 19px;
+      background: var(--surface);
+      box-shadow: 0 17px 45px rgba(28, 46, 41, .07);
+    }
+    .practice-topline { display: flex; align-items: center; justify-content: space-between; gap: 14px; color: var(--green); font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .practice-topline span:last-child { color: #78847e; font-size: 10px; letter-spacing: .06em; }
+    .practice-question { min-height: 76px; margin: 20px 0 24px; font-family: Georgia, serif; font-size: clamp(23px, 3vw, 31px); font-weight: 500; letter-spacing: -.03em; line-height: 1.3; }
+    .practice-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+    .practice-controls .button { min-height: 42px; font-size: 12px; cursor: pointer; }
+    .timer {
+      display: inline-flex;
+      min-width: 72px;
+      min-height: 42px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #dce4db;
+      border-radius: 999px;
+      background: #f1f5ef;
+      color: var(--green-dark);
+      font-variant-numeric: tabular-nums;
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .practice-status { min-height: 22px; margin: 12px 0 0; color: #6d7973; font-size: 11px; }
+    .self-check { display: flex; flex-wrap: wrap; gap: 8px 15px; margin-top: 20px; padding-top: 17px; border-top: 1px solid #e8e8df; color: #61706a; font-size: 11px; }
+    .self-check strong { width: 100%; color: var(--ink); }
+    .self-check span::before { margin-right: 6px; color: var(--coral); content: "•"; }
+
+    .conclusion { padding: 82px 0 90px; background: #efece2; }
+    .conclusion-inner { display: grid; grid-template-columns: .7fr 1.3fr; gap: 60px; align-items: start; }
+    .conclusion-stamp { display: inline-grid; width: 86px; height: 86px; place-items: center; transform: rotate(-7deg); border: 1px solid #d6bd82; border-radius: 50%; color: var(--green); font-family: Georgia, serif; font-size: 26px; }
+    .conclusion-copy p { color: #56635d; }
+    .conclusion-copy .final-line { margin-bottom: 0; color: var(--green-dark); font-family: Georgia, serif; font-size: 21px; line-height: 1.45; }
+    .site-footer { padding: 30px 0; background: #202e2a; color: #d0ddd5; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 30px; align-items: start; }
+    .footer-brand { font-weight: 800; letter-spacing: -.03em; }
+    .footer-copy { max-width: 660px; color: #b4c3bb; font-size: 11px; line-height: 1.8; }
+    .footer-copy a { color: #f0ce84; text-underline-offset: 2px; }
+    .footer-copy p { margin: 5px 0 0; }
+
+    [hidden] { display: none !important; }
+    .chat-widget {
+      position: fixed;
+      z-index: 30;
+      right: 22px;
+      bottom: 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 12px;
+    }
+    .chat-launcher {
+      display: inline-flex;
+      min-height: 52px;
+      align-items: center;
+      gap: 10px;
+      padding: 0 18px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--green);
+      color: white;
+      box-shadow: 0 12px 32px rgba(24, 63, 55, .26);
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 750;
+      transition: transform .2s ease, background .2s ease;
+    }
+    .chat-launcher:hover { transform: translateY(-2px); background: var(--green-dark); }
+    .chat-launcher-icon { display: grid; width: 27px; height: 27px; place-items: center; border-radius: 50%; background: rgba(255,255,255,.17); font-size: 15px; }
+    .chat-panel {
+      display: flex;
+      width: min(390px, calc(100vw - 36px));
+      height: min(580px, calc(100dvh - 100px));
+      min-height: 370px;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid rgba(32, 45, 43, .12);
+      border-radius: 20px;
+      background: var(--surface);
+      box-shadow: 0 20px 70px rgba(20, 40, 34, .23);
+    }
+    .chat-header {
+      display: flex;
+      min-height: 70px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 13px 16px;
+      background: var(--green-dark);
+      color: white;
+    }
+    .chat-heading { display: flex; align-items: center; gap: 11px; }
+    .chat-avatar { display: grid; width: 39px; height: 39px; place-items: center; border: 1px solid rgba(255,255,255,.25); border-radius: 13px; background: rgba(255,255,255,.12); font-family: Georgia, serif; font-size: 20px; }
+    .chat-heading strong { display: block; font-size: 14px; }
+    .chat-heading small { display: block; color: #d6e4dc; font-size: 10px; }
+    .chat-close {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 10px;
+      background: transparent;
+      color: white;
+      cursor: pointer;
+      font-size: 19px;
+    }
+    .chat-log {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      gap: 10px;
+      overflow-y: auto;
+      padding: 16px 14px;
+      background: #f8f8f3;
+      scroll-behavior: smooth;
+    }
+    .chat-bubble {
+      max-width: 88%;
+      padding: 11px 13px;
+      border: 1px solid #e6e8df;
+      border-radius: 14px 14px 14px 4px;
+      background: white;
+      color: #33413b;
+      font-size: 12px;
+      line-height: 1.55;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+    .chat-bubble.user {
+      align-self: flex-end;
+      border-color: var(--green);
+      border-radius: 14px 14px 4px 14px;
+      background: var(--green);
+      color: white;
+    }
+    .chat-bubble.pending { color: #65736c; font-style: italic; }
+    .chat-suggestions { display: flex; flex-wrap: wrap; gap: 7px; padding: 0 13px 12px; background: #f8f8f3; }
+    .chat-suggestion {
+      padding: 7px 10px;
+      border: 1px solid #dce5dc;
+      border-radius: 999px;
+      background: white;
+      color: var(--green-dark);
+      cursor: pointer;
+      font-size: 10px;
+      font-weight: 700;
+    }
+    .chat-suggestion:hover { background: var(--green-soft); }
+    .chat-form { display: flex; gap: 8px; padding: 12px; border-top: 1px solid #e8e8df; background: white; }
+    .chat-input {
+      width: 100%;
+      min-width: 0;
+      min-height: 43px;
+      padding: 10px 12px;
+      border: 1px solid #dce1d9;
+      border-radius: 12px;
+      background: #fbfcf9;
+      color: var(--ink);
+      font-size: 12px;
+    }
+    .chat-send {
+      flex: 0 0 44px;
+      width: 44px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--green);
+      color: white;
+      cursor: pointer;
+      font-size: 18px;
+    }
+    .chat-send:disabled { cursor: wait; opacity: .55; }
+    .chat-privacy { margin: 0; padding: 0 13px 11px; background: white; color: #758079; font-size: 9px; line-height: 1.45; }
+    .chat-privacy a { color: var(--green-dark); }
+
+    .js .reveal { opacity: 0; transform: translateY(16px); transition: opacity .65s ease, transform .65s ease; }
+    .js .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .js .reveal { opacity: 1; transform: none; }
+    }
+    @media (max-width: 920px) {
+      .nav-links { gap: 14px; }
+      .nav-links a { font-size: 12px; }
+      .hero-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+      .hero-visual { min-height: 450px; }
+      .aim-layout, .analysis-grid { gap: 42px; }
+      .practice-grid { gap: 40px; }
+    }
+    @media (max-width: 740px) {
+      .container { width: min(100% - 36px, var(--content)); }
+      .nav-wrap { min-height: 68px; }
+      .menu-toggle { display: inline-grid; place-items: center; }
+      .nav-links {
+        position: absolute;
+        top: 67px;
+        right: 0;
+        left: 0;
+        display: none;
+        align-items: stretch;
+        gap: 0;
+        padding: 8px 18px 16px;
+        border-bottom: 1px solid var(--line);
+        background: var(--paper);
+        box-shadow: 0 14px 20px rgba(28, 46, 41, .06);
+      }
+      .nav-links.open { display: flex; flex-direction: column; }
+      .nav-links a { display: block; padding: 11px 8px; font-size: 14px; }
+      .nav-cta { margin-top: 5px; text-align: center; }
+      .hero { padding: 42px 0 65px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 25px; }
+      .hero-visual { width: min(100%, 530px); min-height: min(105vw, 490px); margin: 0 auto; }
+      .hero-photo { inset: 0 18px 20px 24px; }
+      .floating-note { right: 0; }
+      .section { padding: 70px 0; }
+      .aim-layout, .analysis-grid, .practice-grid, .conclusion-inner { grid-template-columns: 1fr; gap: 34px; }
+      .aim-note { max-width: 600px; }
+      .method-grid { grid-template-columns: 1fr 1fr; }
+      .method-card:last-child { grid-column: span 2; min-height: auto; }
+      .results-head { align-items: start; }
+      .sample-badge { min-width: 124px; padding: 12px; }
+      .results-grid { grid-template-columns: 1fr 1fr; }
+      .result-card:last-child { grid-column: span 2; min-height: 190px; }
+      .analysis-photo, .analysis-photo img { min-height: 350px; height: 350px; }
+      .practice-copy { max-width: 580px; }
+      .conclusion-inner { gap: 20px; }
+      .conclusion-stamp { width: 66px; height: 66px; font-size: 21px; }
+      .footer-inner { flex-direction: column; gap: 10px; }
+      .chat-widget { right: 12px; bottom: 12px; }
+      .chat-panel { width: min(390px, calc(100vw - 24px)); height: min(640px, calc(100dvh - 85px)); }
+    }
+    @media (max-width: 480px) {
+      .container { width: calc(100% - 30px); }
+      h1 { font-size: clamp(42px, 13vw, 57px); }
+      .hero-meta { gap: 14px; }
+      .hero-meta .meta-item { padding-left: 10px; }
+      .hero-visual { min-height: 390px; }
+      .photo-caption { right: 24px; bottom: 33px; left: 35px; }
+      .floating-note { width: 205px; padding: 14px 16px; }
+      .floating-note strong { font-size: 15px; }
+      .section-head { margin-bottom: 30px; }
+      .method-grid, .results-grid, .strategy-grid { grid-template-columns: 1fr; }
+      .method-card:last-child, .result-card:last-child { grid-column: auto; }
+      .scope-note { grid-template-columns: 1fr; gap: 15px; }
+      .results-head { flex-direction: column; }
+      .sample-badge { display: flex; min-width: 0; align-items: baseline; gap: 10px; text-align: left; }
+      .sample-badge strong { font-size: 27px; }
+      .result-card { min-height: 180px; }
+      .result-icon { margin-bottom: 16px; }
+      .analysis-photo, .analysis-photo img { min-height: 290px; height: 290px; }
+      .strategy-card { grid-template-columns: 44px 1fr; gap: 13px; padding: 20px; }
+      .strategy-number { width: 40px; height: 40px; font-size: 18px; }
+      .practice-controls { align-items: stretch; }
+      .practice-controls .button { flex: 1 1 150px; }
+      .timer { flex: 0 0 72px; }
+    }
+  </style>
 </head>
-
 <body>
-
-<!-- NAVIGATION -->
-
-<nav>
-    <div class="logo">IELTS<span>Lab</span></div>
-
-    <ul>
-        <li><a href="#research">Research</a></li>
-        <li><a href="#strategies">Strategies</a></li>
-        <li><a href="#experiment">Experiment</a></li>
-        <li><a href="#coach">Speaking Coach</a></li>
-    </ul>
-</nav>
-
-
-<!-- HERO -->
-
-<section class="hero">
-
-    <div class="hero-content">
-
-        <div class="badge">
-            🎓 Student Research Project
-        </div>
-
-        <h1>
-            The Most Effective Strategies for Improving
-            <span class="gradient">IELTS Speaking Skills</span>
-            Among Teenagers
-        </h1>
-
-        <p>
-            A student research project exploring how different learning
-            strategies can improve fluency, pronunciation, vocabulary
-            and confidence among teenage IELTS learners.
-        </p>
-
-        <div class="hero-buttons">
-            <a class="btn primary" href="#experiment">
-                Explore Research
-            </a>
-
-            <a class="btn secondary" href="#coach">
-                Try Speaking Coach 🤖
-            </a>
-        </div>
-
-        <div class="photo-strip" aria-label="English learning and speaking practice">
-            <div class="photo-card">
-                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=85" alt="Students studying together" loading="lazy">
-                <span>Learn together</span>
-            </div>
-            <div class="photo-card">
-                <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=700&q=85" alt="Speaker practising a presentation" loading="lazy">
-                <span>Speak with confidence</span>
-            </div>
-            <div class="photo-card">
-                <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=700&q=85" alt="Online language learning" loading="lazy">
-                <span>Practice every day</span>
-            </div>
-            <div class="photo-card">
-                <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=700&q=85" alt="Warm, quiet library full of books" loading="lazy">
-                <span>Find your next idea</span>
-            </div>
-        </div>
-
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="topbar">
+    <div class="container nav-wrap">
+      <a class="brand" href="#top" aria-label="SpeakUp Research home">
+        <span class="brand-mark" aria-hidden="true">S</span>
+        <span>SpeakUp<small>Research</small></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-navigation">☰</button>
+      <nav aria-label="Main navigation">
+        <ul class="nav-links" id="primary-navigation">
+          <li><a href="#aim">Research aim</a></li>
+          <li><a href="#methodology">Methodology</a></li>
+          <li><a href="#results">Results</a></li>
+          <li><a href="#strategies">Strategies</a></li>
+          <li><a class="nav-cta" href="#practice">Try a prompt <span aria-hidden="true">↗</span></a></li>
+        </ul>
+      </nav>
     </div>
+  </header>
 
-</section>
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="container hero-grid">
+        <div class="hero-copy-wrap reveal">
+          <p class="eyebrow">Student research · IELTS Speaking</p>
+          <h1>Finding a more <em>confident</em> voice in English.</h1>
+          <p class="hero-copy">A study of teenagers’ speaking difficulties, learning preferences and confidence—and four ways they can practise for IELTS Speaking.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#aim">Explore the research <span aria-hidden="true">↓</span></a>
+            <a class="button button-secondary" href="#practice">Try a speaking prompt</a>
+          </div>
+          <div class="hero-meta" aria-label="Research overview">
+            <div class="meta-item"><strong>18</strong><span>questionnaire participants</span></div>
+            <div class="meta-item"><strong>4</strong><span>practice strategies explored</span></div>
+          </div>
+        </div>
+        <div class="hero-visual reveal">
+          <div class="sunburst" aria-hidden="true"></div>
+          <figure class="hero-photo">
+            <img src="https://images.unsplash.com/photo-1758270704840-0ac001215b55?auto=format&amp;fit=crop&amp;w=1500&amp;q=85" alt="Students talking together in a classroom setting" fetchpriority="high">
+            <figcaption class="photo-caption">Students in conversation · Illustrative image · Photo by <a href="https://unsplash.com/photos/students-talking-in-a-lecture-hall-during-class-9faEJgSvmjc" target="_blank" rel="noopener noreferrer">Vitaly Gariev / Unsplash</a></figcaption>
+          </figure>
+          <aside class="floating-note">
+            <span>Research focus</span>
+            <strong>Practice, preferences and confidence</strong>
+          </aside>
+        </div>
+      </div>
+    </section>
 
+    <section class="section section-white" id="aim">
+      <div class="container aim-layout">
+        <div class="reveal">
+          <p class="kicker">01 · Research aim</p>
+          <h2>What helps teenagers feel ready to speak?</h2>
+          <p class="aim-statement">This research explores <strong>four strategies for improving IELTS Speaking among teenagers</strong>: shadowing, AI speaking practice, speaking clubs and self-recording. It also examines the difficulties teenagers report, the ways they prefer to learn and their confidence when speaking English.</p>
+        </div>
+        <aside class="aim-note reveal">
+          <h3>A closer look at speaking practice</h3>
+          <p>The project brings together learner perspectives and an experience-based comparison of two practice formats.</p>
+          <div class="topic-pills" aria-label="Topics explored">
+            <span>Speaking difficulties</span><span>Learning preferences</span><span>Confidence</span>
+          </div>
+        </aside>
+      </div>
+    </section>
 
-<!-- RESEARCH -->
+    <section class="section" id="methodology">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="kicker">02 · Research methodology</p>
+          <h2>How the project explored the question</h2>
+          <p class="section-lead">The research used a questionnaire to learn about teenagers’ experiences with IELTS Speaking, alongside a practical comparison of speaking clubs and AI speaking practice based on personal experience.</p>
+        </div>
+        <div class="method-grid">
+          <article class="method-card reveal">
+            <span class="index">A</span>
+            <h3>Questionnaire</h3>
+            <p>Asked about speaking difficulties, learning preferences and confidence when speaking English.</p>
+          </article>
+          <article class="method-card reveal">
+            <span class="index">B</span>
+            <h3>Four strategies</h3>
+            <p>Considered shadowing, AI speaking practice, speaking clubs and self-recording as approaches to IELTS Speaking practice.</p>
+          </article>
+          <article class="method-card reveal">
+            <span class="index">C</span>
+            <h3>Practical comparison</h3>
+            <p>Compared the practical advantages and limitations of speaking clubs and AI speaking practice through personal experience.</p>
+          </article>
+        </div>
+        <div class="scope-note reveal" aria-label="Scope of the research">
+          <div><strong>What this approach can describe</strong><p>Participants’ reported challenges, preferences and confidence.</p></div>
+          <div><strong>How to read the findings</strong><p>The project does not report a controlled test of speaking improvement, so it cannot establish which strategy is most effective.</p></div>
+        </div>
+      </div>
+    </section>
 
-<section id="research">
+    <section class="section section-green" id="results">
+      <div class="container">
+        <div class="results-head">
+          <div class="section-head reveal">
+            <p class="kicker">03 · Questionnaire results</p>
+            <h2>What participants reported</h2>
+            <p class="section-lead">The responses point to a mix of language challenges, speaking nerves and preferred ways to practise.</p>
+          </div>
+          <div class="sample-badge reveal"><strong>18</strong><span>participants</span></div>
+        </div>
+        <div class="results-grid">
+          <article class="result-card reveal">
+            <span class="result-icon" aria-hidden="true">Aa</span>
+            <h3>Grammar, fluency &amp; vocabulary</h3>
+            <p>These were among the main IELTS Speaking difficulties reported by participants.</p>
+          </article>
+          <article class="result-card reveal">
+            <span class="result-icon" aria-hidden="true">◌</span>
+            <h3>Nervousness</h3>
+            <p>Many participants said they felt nervous during IELTS Speaking.</p>
+          </article>
+          <article class="result-card reveal">
+            <span class="result-icon" aria-hidden="true">↗</span>
+            <h3>Preferred practice</h3>
+            <p>Speaking clubs and AI speaking practice were the most popular options among the reported responses.</p>
+          </article>
+        </div>
+        <p class="result-footnote reveal">The questionnaire summary provides no category-level counts, so results are presented descriptively without percentages.</p>
+      </div>
+    </section>
 
-    <div class="section-title">
-        <h2>Research Question</h2>
-        <p>What actually helps teenagers improve their IELTS Speaking?</p>
+    <section class="section section-white" id="analysis">
+      <div class="container analysis-grid">
+        <figure class="analysis-photo reveal">
+          <img src="https://images.unsplash.com/photo-1758270704787-615782711641?auto=format&amp;fit=crop&amp;w=1200&amp;q=82" alt="Students talking and studying together in a lecture hall" loading="lazy">
+          <figcaption>Collaborative learning · Illustrative image · Photo by <a href="https://unsplash.com/photos/students-talking-and-studying-in-a-lecture-hall-wAgfqXpYqug" target="_blank" rel="noopener noreferrer">Vitaly Gariev / Unsplash</a></figcaption>
+        </figure>
+        <div class="analysis-copy reveal">
+          <p class="kicker">04 · Analysis</p>
+          <h2>Preferences can guide the next research question.</h2>
+          <p>The questionnaire highlights grammar, fluency, vocabulary and nervousness as areas participants experience as challenging. It also shows that speaking clubs and AI speaking practice stood out in their reported preferences.</p>
+          <p>These responses help identify what learners say they need and the practice options they prefer. The questionnaire describes participants’ views, while the comparison of clubs and AI practice reflects personal experience. A practical study could examine how each strategy affects speaking development.</p>
+          <div class="analysis-callout"><strong>Next step</strong>Further practical testing is needed to assess the effectiveness of these strategies.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-green" id="strategies">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="kicker">05 · Four strategies</p>
+          <h2>Different ways to practise speaking</h2>
+          <p class="section-lead">Each strategy offers a different practice format. The descriptions explain what learners do; this project did not establish the relative effectiveness of the methods.</p>
+        </div>
+        <div class="strategy-grid">
+          <article class="strategy-card reveal">
+            <span class="strategy-number">01</span>
+            <div><h3>Shadowing</h3><p>Listen to a short spoken passage and repeat it, following the speaker’s words and pace.</p><span class="strategy-label">Listen · repeat</span></div>
+          </article>
+          <article class="strategy-card reveal">
+            <span class="strategy-number">02</span>
+            <div><h3>AI speaking practice</h3><p>Respond to spoken prompts with an AI-based practice tool. The project compared its practical advantages and limitations with speaking clubs through personal experience.</p><span class="strategy-label">Prompt · respond</span></div>
+          </article>
+          <article class="strategy-card reveal">
+            <span class="strategy-number">03</span>
+            <div><h3>Speaking clubs</h3><p>Take part in group conversations and practise expressing ideas with other learners. The project included a personal-experience comparison with AI practice.</p><span class="strategy-label">Join · converse</span></div>
+          </article>
+          <article class="strategy-card reveal">
+            <span class="strategy-number">04</span>
+            <div><h3>Self-recording</h3><p>Record a spoken response, listen back and reflect on how clearly you expressed your ideas.</p><span class="strategy-label">Record · reflect</span></div>
+          </article>
+        </div>
+        <p class="strategy-note reveal">The research explores all four strategies; the personal-experience comparison described in the methodology focuses on speaking clubs and AI speaking practice.</p>
+      </div>
+    </section>
+
+    <section class="practice-section section" id="practice">
+      <div class="container practice-grid">
+        <div class="practice-copy reveal">
+          <p class="kicker">A small practice break</p>
+          <h2>Take a moment to speak.</h2>
+          <p>Try an IELTS-style speaking prompt. Use the timer if it helps you practise answering aloud, then reflect on your response.</p>
+          <p class="small-note">This optional activity is separate from the research questionnaire and results.</p>
+        </div>
+        <div class="practice-card reveal">
+          <div class="practice-topline"><span>Speaking prompt</span><span>Practice activity</span></div>
+          <h3 class="practice-question" id="practice-question">What do you enjoy doing in your free time?</h3>
+          <div class="practice-controls">
+            <span class="timer" id="timer" aria-label="60 seconds remaining">01:00</span>
+            <button class="button button-primary" type="button" id="timer-toggle">Start 60-second timer</button>
+            <button class="button button-secondary" type="button" id="next-question">Try another question</button>
+          </div>
+          <p class="practice-status" id="practice-status" aria-live="polite">Speak aloud, or plan a short answer before you begin.</p>
+          <div class="self-check" aria-label="Reflection prompts">
+            <strong>After you answer, reflect:</strong>
+            <span>Did I explain my idea?</span><span>Did I give an example?</span><span>What would I practise next?</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="conclusion" id="conclusion">
+      <div class="container conclusion-inner">
+        <div class="reveal"><p class="kicker">06 · Research conclusion</p><span class="conclusion-stamp" aria-hidden="true">Speak</span></div>
+        <div class="conclusion-copy reveal">
+          <h2>Confidence grows through opportunities to practise.</h2>
+          <p>The questionnaire identified grammar, fluency and vocabulary challenges, as well as nervousness during IELTS Speaking. Speaking clubs and AI speaking practice were popular among the respondents.</p>
+          <p>The findings suggest that teenagers may benefit from more opportunities to practise speaking English and develop confidence. Further practical testing is needed to assess how these strategies support speaking development.</p>
+          <p class="final-line">The study offers a useful snapshot of learners’ experiences—and a starting point for further research.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="chat-widget" id="chat-widget">
+    <section class="chat-panel" id="chat-panel" aria-labelledby="chat-title" hidden>
+      <header class="chat-header">
+        <div class="chat-heading">
+          <span class="chat-avatar" aria-hidden="true">S</span>
+          <span><strong id="chat-title">SpeakUp AI</strong><small>IELTS speaking practice</small></span>
+        </div>
+        <button class="chat-close" id="chat-close" type="button" aria-label="Close chat">×</button>
+      </header>
+      <div class="chat-log" id="chat-log" role="log" aria-label="Conversation" aria-live="polite" aria-relevant="additions">
+        <div class="chat-bubble">Hi! I’m your SpeakUp practice coach. Ask me about IELTS Speaking, practise an answer, or send me a sentence for feedback.</div>
+      </div>
+      <div class="chat-suggestions" id="chat-suggestions" aria-label="Suggested messages">
+        <button class="chat-suggestion" type="button">Give me a speaking question</button>
+        <button class="chat-suggestion" type="button">Check my English</button>
+      </div>
+      <form class="chat-form" id="chat-form">
+        <label class="skip-link" for="chat-input">Message SpeakUp AI</label>
+        <input class="chat-input" id="chat-input" type="text" maxlength="1500" autocomplete="off" placeholder="Type your message…" required>
+        <button class="chat-send" id="chat-send" type="submit" aria-label="Send message">↑</button>
+      </form>
+      <p class="chat-privacy">AI replies may be inaccurate. Don’t share personal information. Messages are sent to the AI service to generate replies.</p>
+    </section>
+    <button class="chat-launcher" id="chat-launcher" type="button" aria-expanded="false" aria-controls="chat-panel">
+      <span class="chat-launcher-icon" aria-hidden="true">✦</span><span>Talk to SpeakUp AI</span>
+    </button>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">SpeakUp Research</div>
+      <div class="footer-copy">
+        <p>Photographs by <a href="https://unsplash.com/@gariev" target="_blank" rel="noopener noreferrer">Vitaly Gariev on Unsplash</a>. Images are illustrative and do not represent the questionnaire participants.</p>
+        <p>Design reference: clear IELTS topic navigation from <a href="https://ieltsliz.com/" target="_blank" rel="noopener noreferrer">IELTS Liz</a> and organized speaking practice resources from <a href="https://learnenglish.britishcouncil.org/free-resources/speaking" target="_blank" rel="noopener noreferrer">British Council LearnEnglish</a>.</p>
+      </div>
     </div>
-
-    <div class="research-grid">
-
-        <div class="card">
-            <div class="card-icon">🎯</div>
-            <h3>Research Aim</h3>
-            <p>
-                To identify which learning strategies can produce
-                noticeable improvements in IELTS Speaking performance.
-            </p>
-        </div>
-
-        <div class="card">
-            <div class="card-icon">🧪</div>
-            <h3>Experiment</h3>
-            <p>
-                Teenagers can be divided into groups and use different
-                speaking strategies for a fixed period of time.
-            </p>
-        </div>
-
-        <div class="card">
-            <div class="card-icon">📊</div>
-            <h3>Measurement</h3>
-            <p>
-                Participants can complete speaking tasks before and
-                after the experiment and compare their results.
-            </p>
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- STRATEGIES -->
-
-<section id="strategies">
-
-    <div class="section-title">
-        <h2>4 Strategies</h2>
-        <p>The strategies tested in this research</p>
-    </div>
-
-    <div class="strategies">
-
-        <div class="strategy">
-
-            <div class="strategy-number">STRATEGY 01</div>
-
-            <h3>🎧 Shadowing</h3>
-
-            <p>
-                Students listen to native or advanced speakers
-                and repeat their speech while copying pronunciation,
-                rhythm and intonation.
-            </p>
-
-            <span class="strategy-tag">
-                Pronunciation + Fluency
-            </span>
-
-        </div>
-
-
-        <div class="strategy">
-
-            <div class="strategy-number">STRATEGY 02</div>
-
-            <h3>🤖 AI Speaking</h3>
-
-            <p>
-                Students practise speaking with an AI assistant,
-                receive instant feedback and learn how to improve
-                their answers.
-            </p>
-
-            <span class="strategy-tag">
-                Feedback + Vocabulary
-            </span>
-
-        </div>
-
-
-        <div class="strategy">
-
-            <div class="strategy-number">STRATEGY 03</div>
-
-            <h3>👥 Speaking Clubs</h3>
-
-            <p>
-                Students regularly communicate with classmates
-                and practise IELTS questions in a social environment.
-            </p>
-
-            <span class="strategy-tag">
-                Confidence + Fluency
-            </span>
-
-        </div>
-
-
-        <div class="strategy">
-
-            <div class="strategy-number">STRATEGY 04</div>
-
-            <h3>🎙️ Self-recording</h3>
-
-            <p>
-                Students record their own answers, listen again,
-                identify mistakes and repeat the task.
-            </p>
-
-            <span class="strategy-tag">
-                Self-correction
-            </span>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- EXPERIMENT -->
-
-<section id="experiment">
-
-    <div class="section-title">
-
-        <h2>Research Experiment</h2>
-
-        <p>
-            A possible experimental design for teenage IELTS learners
-        </p>
-
-    </div>
-
-    <div class="experiment">
-
-        <div class="experiment-box">
-
-            <h3>How the experiment works</h3>
-
-            <p style="color:#91a4b9;margin-top:10px;line-height:1.6;">
-
-                Participants complete the same speaking task before
-                and after several weeks of practice. Each group uses
-                one main strategy.
-
-            </p>
-
-            <div class="steps">
-
-                <div class="step">
-                    <span>1️⃣</span>
-                    <strong>Pre-test</strong>
-                    <p>Initial Speaking assessment</p>
-                </div>
-
-                <div class="step">
-                    <span>2️⃣</span>
-                    <strong>Practice</strong>
-                    <p>Use one selected strategy</p>
-                </div>
-
-                <div class="step">
-                    <span>3️⃣</span>
-                    <strong>Post-test</strong>
-                    <p>Repeat a similar task</p>
-                </div>
-
-                <div class="step">
-                    <span>4️⃣</span>
-                    <strong>Compare</strong>
-                    <p>Analyse the improvement</p>
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- DEMO CHART -->
-
-        <div class="chart-box">
-
-            <h3 style="text-align:center;">
-                Example of Speaking Progress
-            </h3>
-
-            <p style="text-align:center;color:#d1b9a7;font-size:12px;margin-top:6px;">
-                Demonstration data — replace with your real results
-            </p>
-
-            <svg class="line-chart" viewBox="0 0 720 330" role="img" aria-label="Illustrative line chart showing speaking scores increasing over four weeks for four practice strategies">
-                <line class="grid-line" x1="78" y1="93" x2="660" y2="93"/><line class="grid-line" x1="78" y1="136" x2="660" y2="136"/><line class="grid-line" x1="78" y1="179" x2="660" y2="179"/><line class="grid-line" x1="78" y1="222" x2="660" y2="222"/><line class="grid-line" x1="78" y1="265" x2="660" y2="265"/>
-                <line class="axis" x1="78" y1="75" x2="78" y2="265"/><line class="axis" x1="78" y1="265" x2="660" y2="265"/>
-                <text x="52" y="269">4</text><text x="52" y="226">5</text><text x="52" y="183">6</text><text x="52" y="140">7</text><text x="52" y="97">8</text>
-                <text x="69" y="290">Start</text><text x="208" y="290">Week 1</text><text x="350" y="290">Week 2</text><text x="493" y="290">Week 3</text><text x="632" y="290">Week 4</text>
-                <text x="18" y="55">Score</text><text x="332" y="322">Practice period</text>
-                <path class="series line-shadow" d="M78 265 L220 230 L362 209 L504 175 L646 145"/><path class="series line-coach" d="M78 265 L220 222 L362 188 L504 157 L646 119"/><path class="series line-group" d="M78 265 L220 239 L362 213 L504 183 L646 162"/><path class="series line-self" d="M78 265 L220 248 L362 222 L504 205 L646 179"/>
-                <g fill="#e89b68"><circle class="point" cx="78" cy="265" r="5"/><circle class="point" cx="220" cy="230" r="5"/><circle class="point" cx="362" cy="209" r="5"/><circle class="point" cx="504" cy="175" r="5"/><circle class="point" cx="646" cy="145" r="5"/></g>
-                <g fill="#a9c18d"><circle class="point" cx="78" cy="265" r="5"/><circle class="point" cx="220" cy="222" r="5"/><circle class="point" cx="362" cy="188" r="5"/><circle class="point" cx="504" cy="157" r="5"/><circle class="point" cx="646" cy="119" r="5"/></g>
-                <g fill="#d6b776"><circle class="point" cx="78" cy="265" r="5"/><circle class="point" cx="220" cy="239" r="5"/><circle class="point" cx="362" cy="213" r="5"/><circle class="point" cx="504" cy="183" r="5"/><circle class="point" cx="646" cy="162" r="5"/></g>
-                <g fill="#d48383"><circle class="point" cx="78" cy="265" r="5"/><circle class="point" cx="220" cy="248" r="5"/><circle class="point" cx="362" cy="222" r="5"/><circle class="point" cx="504" cy="205" r="5"/><circle class="point" cx="646" cy="179" r="5"/></g>
-            </svg>
-            <div class="line-legend">
-                <span style="--legend-color:#e89b68">Shadowing</span><span style="--legend-color:#a9c18d">Coach practice</span><span style="--legend-color:#d6b776">Speaking club</span><span style="--legend-color:#d48383">Self-study</span>
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- AI COACH -->
-
-<section id="coach" class="app-section">
-
-    <div class="section-title">
-
-        <h2>Meet Your Speaking Coach 🤖</h2>
-
-        <p>
-            One of the strategies tested in the project
-        </p>
-
-    </div>
-
-
-    <div class="app-layout">
-
-        <div class="app-info">
-
-            <h2>
-                Practice English
-                <span class="gradient">out loud</span>
-            </h2>
-
-            <p>
-                Practise IELTS-style speaking with a guided browser coach.
-                Use your microphone or type answers, hear prompts aloud, and
-                get an informal English-level estimate after five questions.
-                No account is needed; microphone support depends on your browser.
-            </p>
-
-
-            <div class="features">
-
-                <div class="feature">
-                    🎧 <strong>Shadowing tips</strong><br>
-                    <small>Improve pronunciation and intonation.</small>
-                </div>
-
-                <div class="feature">
-                    🚀 <strong>Fluency training</strong><br>
-                    <small>Learn how to speak more naturally.</small>
-                </div>
-
-                <div class="feature">
-                    💡 <strong>Band 7+ vocabulary</strong><br>
-                    <small>Discover useful advanced expressions.</small>
-                </div>
-
-                <div class="feature">
-                    🗣️ <strong>Speaking practice</strong><br>
-                    <small>Answer IELTS-style questions.</small>
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- CHAT -->
-
-        <div class="chat-container">
-
-            <div class="chat-header">
-
-                <div class="avatar" role="img" aria-label="Friendly speaking coach">
-                    <span class="bot-antenna"></span>
-                    <span class="bot-face"><span class="bot-eyes"><i></i><i></i></span><span class="bot-smile"></span></span>
-                </div>
-
-                <div class="header-info">
-
-                    <h3>IELTS Speaking Coach</h3>
-
-                    <p>
-                        <span class="status-dot"></span>
-                        Guided Speaking Coach
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="chat-messages" id="chat-messages">
-
-                <div class="message ai-msg">
-
-                    👋 Hi! I'm your English speaking coach.
-
-                    Start a Speaking Part 1 interview and I’ll ask you questions one by one.
-                    Answer by voice or type your reply; I’ll keep the conversation going.
-
-                </div>
-
-            </div>
-
-            <div class="voice-tools">
-                <button class="voice-btn part1-btn" id="part1-button" onclick="startPart1()">🗣 Start Speaking Part 1</button>
-                <button class="level-btn" onclick="startLevelCheck()">📊 Check my level</button>
-                <button class="voice-btn" id="mic-button" onclick="startListening()">🎙 Speak</button>
-                <button class="voice-btn" id="sound-button" onclick="toggleSpeech()">🔊 Voice on</button>
-                <span class="voice-note" id="voice-status">Microphone works in supported browsers</span>
-            </div>
-
-
-            <div class="quick-actions">
-
-                <button class="quick-btn"
-                onclick="sendQuick('Give me a Shadowing tip')">
-                    🎧 Shadowing
-                </button>
-
-                <button class="quick-btn"
-                onclick="sendQuick('How can I improve my fluency?')">
-                    🚀 Fluency
-                </button>
-
-                <button class="quick-btn"
-                onclick="sendQuick('Give me a Part 2 phrase')">
-                    💡 Part 2
-                </button>
-
-                <button class="quick-btn"
-                onclick="sendQuick('Give me an IELTS question')">
-                    🎯 Question
-                </button>
-
-            </div>
-
-
-            <div class="chat-input-area">
-
-                <input
-                    type="text"
-                    id="user-input"
-                    class="chat-input"
-                    placeholder="Ask your IELTS question..."
-                    onkeypress="handleKeyPress(event)"
-                >
-
-                <button
-                    class="send-btn"
-                    onclick="sendMessage()">
-                    ➤
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- MINI PRACTICE -->
-
-<section>
-
-    <div class="section-title">
-
-        <h2>🎯 Speaking Practice</h2>
-
-        <p>
-            Try a mini IELTS Speaking task
-        </p>
-
-    </div>
-
-
-    <div class="practice">
-
-        <div class="practice-card">
-
-            <div style="color:#38bdf8;">
-                IELTS Speaking Part 2
-            </div>
-
-            <div class="question" id="question">
-
-                Describe a skill you would like to learn.
-
-            </div>
-
-            <textarea
-                class="answer-area"
-                id="answer"
-                placeholder="Write your answer here..."
-            ></textarea>
-
-            <button
-                class="btn primary evaluate"
-                onclick="evaluateAnswer()">
-
-                Analyse My Answer
-
-            </button>
-
-            <button class="btn secondary evaluate" onclick="nextQuestion()">Next question →</button>
-
-            <div
-                id="evaluation"
-                style="margin-top:20px;color:#8fb1cb;">
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- CONCLUSION -->
-
-<section>
-
-    <div class="section-title">
-
-        <h2>Research Conclusion</h2>
-
-        <p>
-            What this project aims to discover
-        </p>
-
-    </div>
-
-
-    <div class="conclusion">
-
-        <div class="conclusion-box">
-
-            <h3 style="font-size:28px;margin-bottom:20px;">
-                The key question
-            </h3>
-
-            <p>
-
-                Instead of assuming that one strategy is the best,
-                this project compares several approaches using
-                measurable Speaking results.
-
-                <br><br>
-
-                The final conclusion should be based on the actual
-                pre-test and post-test data collected from participants.
-
-                <br><br>
-
-                This can help teenagers understand which learning
-                techniques are most useful for improving their
-                IELTS Speaking skills.
-
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<footer>
-
-    IELTS Speaking Research Lab • Student Research Project
-
-</footer>
-
-
-<script>
-
-/* =========================
-   SPEAKING COACH + VOICE
-========================= */
-
-const messagesContainer =
-    document.getElementById("chat-messages");
-
-const userInput =
-    document.getElementById("user-input");
-
-const voiceStatus = document.getElementById("voice-status");
-const micButton = document.getElementById("mic-button");
-const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-let recognition = null;
-let speechEnabled = true;
-let levelCheckActive = false;
-let levelAnswers = [];
-let part1Active = false;
-let part1AutoListen = false;
-let part1QuestionIndex = 0;
-let part1Answers = [];
-let part1Topic = null;
-
-const part1Topics = [
-    {topic:"your hometown", questions:["Where is your hometown?", "What do you like most about your hometown?", "Has your hometown changed much in recent years?", "Would you like to live there in the future?", "What would you recommend a visitor see there?"]},
-    {topic:"your studies", questions:["What subject are you studying?", "Why did you choose that subject?", "What do you enjoy most about your studies?", "Is there anything you find difficult about studying?", "What would you like to study in the future?"]},
-    {topic:"your free time", questions:["What do you usually do in your free time?", "Did you have the same hobbies when you were younger?", "Do you prefer spending free time alone or with other people?", "Is there a new activity you would like to try?", "How important is it for you to have free time?"]},
-    {topic:"music", questions:["What kind of music do you enjoy listening to?", "When do you usually listen to music?", "Did you learn to play a musical instrument as a child?", "Has your taste in music changed over time?", "Would you like to go to a live music event?"]},
-    {topic:"food", questions:["What kind of food do you enjoy?", "Do you prefer eating at home or at a restaurant?", "Can you cook any dishes?", "Have your eating habits changed recently?", "Is there a food you would like to try?"]},
-    {topic:"weekends", questions:["What do you usually do at weekends?", "Do you prefer busy weekends or relaxing ones?", "Did you do different things at weekends as a child?", "Who do you usually spend your weekends with?", "Is there anything special you are looking forward to doing this weekend?"]},
-    {topic:"weather", questions:["What kind of weather do you like most?", "Does the weather affect what you do?", "What is the weather usually like where you live?", "Has the weather changed in your country in recent years?", "Which season do you enjoy the most?"]}
-];
-
-const levelQuestions = [
-    "Let's check your English level. Please introduce yourself and tell me what you enjoy doing in your free time.",
-    "What is something new you learned recently? How did you learn it?",
-    "Do you think technology makes learning easier? Why or why not?",
-    "Tell me about a challenge you faced and how you dealt with it.",
-    "If you could improve one thing in your city or school, what would you change, and why?"
-];
-
-
-function addMessage(text,sender){
-
-    const msgDiv =
-        document.createElement("div");
-
-    msgDiv.className =
-        `message ${sender === "ai"
-        ? "ai-msg"
-        : "user-msg"}`;
-
-    msgDiv.innerText = text;
-
-    messagesContainer.appendChild(msgDiv);
-
-    messagesContainer.scrollTop =
-        messagesContainer.scrollHeight;
-}
-
-function showTyping(){
-    const bubble = document.createElement("div");
-    bubble.className = "message ai-msg typing-indicator";
-    bubble.setAttribute("aria-label", "Coach is thinking");
-    bubble.innerHTML = "<i></i><i></i><i></i>";
-    messagesContainer.appendChild(bubble);
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    return bubble;
-}
-
-function speakText(text, afterSpeak){
-    if(!speechEnabled || !("speechSynthesis" in window)){
-        if(afterSpeak) afterSpeak();
-        return;
-    }
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = "en-US";
-    utterance.rate = 0.95;
-    let finished = false;
-    const finish = () => { if(finished) return; finished = true; if(afterSpeak) afterSpeak(); };
-    utterance.onend = finish;
-    utterance.onerror = finish;
-    window.speechSynthesis.speak(utterance);
-}
-
-function coachReply(userText){
-    const text = userText.toLowerCase();
-    if(/hello|hi\b|hey|привет/.test(text)) return "Hi! I'm glad you're here. We can practise English together. What would you like to talk about?";
-    if(/level|уров|check my|оцен/.test(text)) return "I can estimate your level from a few English answers. Press “Check my level” and answer five short questions aloud or in text.";
-    if(/pronunciation|shadowing|произнош/.test(text)) return "Try shadowing: listen to one short sentence, pause, then copy its sounds, rhythm and pauses. Record yourself and compare. Which sound is hardest for you?";
-    if(/fluency|бегл/.test(text)) return "To sound more fluent, answer in three steps: give your idea, explain why, then add an example. Try not to stop for every small grammar mistake. Want to practise with a question?";
-    if(/vocab|word|словар/.test(text)) return "Learn useful word groups instead of isolated words. For example: “make a decision”, “a memorable experience”, and “from my point of view”. Can you make a sentence with one of them?";
-    if(/question|вопрос|practice|практик/.test(text)) return "Here is a speaking question: Describe a place where you feel relaxed. Where is it, what do you do there, and why do you like it?";
-    if(/thank/.test(text)) return "You're welcome! Keep going—short daily practice is more useful than waiting until you feel completely ready. What would you like to practise next?";
-    const words = userText.trim().split(/\s+/).filter(Boolean).length;
-    if(words < 5) return "Good start! Can you tell me a little more? Add a reason or a small example, and I'll keep the conversation going.";
-    return "Thanks for sharing that. I understand your main idea. Could you explain why you feel that way, or give me an example? This will help you practise giving a fuller answer.";
-}
-
-function estimateLevel(answers){
-    const text = answers.join(" ").toLowerCase();
-    const words = text.match(/[a-z]+(?:'[a-z]+)?/g) || [];
-    const uniqueRatio = new Set(words).size / Math.max(words.length, 1);
-    const connectors = (text.match(/\b(because|although|however|therefore|for example|in addition|while|whereas|as a result|on the other hand)\b/g) || []).length;
-    const pastFuture = /\b(yesterday|last year|when i was|i have|i've|i will|i would|going to|used to)\b/.test(text);
-    const longerWords = words.filter(word => word.length >= 8).length;
-    const sentences = (text.match(/[.!?]/g) || []).length;
-    const score = Math.min(words.length / 45, 1.5) + connectors * 0.22 + (pastFuture ? 0.5 : 0) + longerWords / Math.max(words.length, 1) * 2 + uniqueRatio;
-    let level = "A1–A2";
-    if(score >= 4.1 && words.length >= 90) level = "B2";
-    else if(score >= 3.25 && words.length >= 65) level = "B1–B2";
-    else if(score >= 2.35 && words.length >= 35) level = "A2–B1";
-    const tips = [];
-    if(words.length < 65) tips.push("try longer answers with one reason and one example");
-    if(connectors < 2) tips.push("connect ideas with words such as because, although and for example");
-    if(sentences < 5) tips.push("practise making complete sentences");
-    return {level, words: words.length, tip: tips[0] || "keep building detailed answers and using a wider range of sentence patterns"};
-}
-
-function startLevelCheck(){
-    if(part1Active) endPart1(false);
-    levelCheckActive = true;
-    levelAnswers = [];
-    addMessage("Let's do a quick speaking check. There are five questions. Answer in English with as much detail as you can. This gives only a rough practice estimate, not an official IELTS or CEFR result.", "ai");
-    askLevelQuestion();
-}
-
-async function requestMicrophone(){
-    if(!SpeechRecognition){
-        voiceStatus.textContent = "Speech recognition isn't available in this browser. Try Chrome or Edge, or type your answers.";
-        return false;
-    }
-    if(!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia){
-        voiceStatus.textContent = "Microphone access needs HTTPS or localhost. You can still answer by typing.";
-        return false;
-    }
-    micButton.disabled = true;
-    voiceStatus.textContent = "Allow microphone access in your browser…";
-    try{
-        const stream = await navigator.mediaDevices.getUserMedia({audio:true});
-        stream.getTracks().forEach(track => track.stop());
-        voiceStatus.textContent = "Microphone ready. I'll listen after each question.";
-        return true;
-    }catch(error){
-        if(error.name === "NotAllowedError" || error.name === "SecurityError") voiceStatus.textContent = "Microphone permission is blocked. Allow it in browser site settings, then try again.";
-        else if(error.name === "NotFoundError") voiceStatus.textContent = "No microphone was found. Connect one or type your answers.";
-        else voiceStatus.textContent = "Could not access the microphone. Check its connection and browser permission.";
-        return false;
-    }finally{
-        micButton.disabled = false;
-    }
-}
-
-function startPart1(){
-    if(part1Active){ endPart1(true); return; }
-    levelCheckActive = false;
-    part1Topic = part1Topics[Math.floor(Math.random() * part1Topics.length)];
-    part1QuestionIndex = 0;
-    part1Answers = [];
-    const button = document.getElementById("part1-button");
-    button.disabled = true;
-    requestMicrophone().then(voiceReady => {
-        part1AutoListen = voiceReady;
-        part1Active = true;
-        button.disabled = false;
-        button.classList.add("active");
-        button.textContent = "⏹ End Speaking Part 1";
-        const intro = `Let's practise IELTS Speaking Part 1. Our topic is ${part1Topic.topic}. Please answer naturally in one or two sentences. You can tap the microphone to stop listening at any time.`;
-        addMessage(intro, "ai");
-        speakText(intro, askPart1Question);
+  </footer>
+
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+      menuToggle.setAttribute('aria-expanded', String(!isOpen));
+      menuToggle.setAttribute('aria-label', isOpen ? 'Open navigation' : 'Close navigation');
+      navLinks.classList.toggle('open', !isOpen);
     });
-}
 
-function askPart1Question(){
-    if(!part1Active) return;
-    if(part1QuestionIndex >= part1Topic.questions.length){
-        const count = part1Answers.reduce((total, answer) => total + answer.trim().split(/\s+/).filter(Boolean).length, 0);
-        const closing = `That's the end of this Part 1 practice. You answered five questions about ${part1Topic.topic}. You spoke about ${count} words. Great work—try adding a reason or a small example to make your answers fuller.`;
-        addMessage(closing, "ai");
-        endPart1(false);
-        speakText(closing);
-        return;
-    }
-    const question = `${part1QuestionIndex + 1}/5 · ${part1Topic.questions[part1QuestionIndex]}`;
-    part1QuestionIndex++;
-    addMessage(question, "ai");
-    speakText(question, () => {
-        if(part1Active && part1AutoListen) startRecognition();
-        else if(part1Active && !SpeechRecognition) voiceStatus.textContent = "Voice recognition isn't supported here. Type your answer below.";
-        else if(part1Active) voiceStatus.textContent = "Tap 🎙 Speak to answer, or type below.";
+    navLinks.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Open navigation');
+      });
     });
-}
 
-function endPart1(announce){
-    part1Active = false;
-    part1AutoListen = false;
-    const button = document.getElementById("part1-button");
-    button.classList.remove("active");
-    button.textContent = "🗣 Start Speaking Part 1";
-    if(recognition && micButton.classList.contains("listening")) recognition.stop();
-    if(announce){
-        if("speechSynthesis" in window) window.speechSynthesis.cancel();
-        addMessage("Practice paused. Press “Start Speaking Part 1” whenever you're ready to try again.", "ai");
-        voiceStatus.textContent = "Interview ended.";
+    const prompts = [
+      'What do you enjoy doing in your free time?',
+      'Do you prefer studying alone or with other people? Why?',
+      'What is something new you would like to learn?',
+      'Tell me about a place where you like to spend time.'
+    ];
+    const promptElement = document.getElementById('practice-question');
+    const timerElement = document.getElementById('timer');
+    const timerToggle = document.getElementById('timer-toggle');
+    const nextQuestion = document.getElementById('next-question');
+    const practiceStatus = document.getElementById('practice-status');
+    let remaining = 60;
+    let timerInterval = null;
+    let promptIndex = 0;
+
+    function displayTime() {
+      const minutes = String(Math.floor(remaining / 60)).padStart(2, '0');
+      const seconds = String(remaining % 60).padStart(2, '0');
+      timerElement.textContent = minutes + ':' + seconds;
+      timerElement.setAttribute('aria-label', remaining + ' seconds remaining');
     }
-}
 
-function askLevelQuestion(){
-    const questionIndex = levelAnswers.length;
-    if(questionIndex >= levelQuestions.length){
-        const result = estimateLevel(levelAnswers);
-        const report = `Your practice estimate: ${result.level}. I used your answer length, vocabulary variety and linking words (${result.words} words in total). To improve, ${result.tip}. This is an informal estimate, not a certified test.`;
-        addMessage(report, "ai");
-        const card = document.createElement("div");
-        card.className = "level-card";
-        card.innerHTML = `<strong>Estimated speaking level: ${result.level}</strong><br>Practice estimate from five answers · not an official score`;
-        messagesContainer.appendChild(card);
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        levelCheckActive = false;
-        speakText(report);
+    function resetTimer(message) {
+      window.clearInterval(timerInterval);
+      timerInterval = null;
+      remaining = 60;
+      displayTime();
+      timerToggle.textContent = 'Start 60-second timer';
+      practiceStatus.textContent = message;
+    }
+
+    timerToggle.addEventListener('click', () => {
+      if (timerInterval) {
+        window.clearInterval(timerInterval);
+        timerInterval = null;
+        timerToggle.textContent = 'Resume timer';
+        practiceStatus.textContent = 'Timer paused. Continue when you are ready.';
         return;
-    }
-    const prompt = `${questionIndex + 1}/${levelQuestions.length} · ${levelQuestions[questionIndex]}`;
-    addMessage(prompt, "ai");
-    speakText(levelQuestions[questionIndex]);
-}
+      }
+      if (remaining === 0) remaining = 60;
+      timerToggle.textContent = 'Pause timer';
+      practiceStatus.textContent = 'Your practice time is running.';
+      displayTime();
+      timerInterval = window.setInterval(() => {
+        remaining -= 1;
+        displayTime();
+        if (remaining <= 0) {
+          window.clearInterval(timerInterval);
+          timerInterval = null;
+          timerToggle.textContent = 'Start again';
+          practiceStatus.textContent = 'Time is up. Take a moment to reflect on your answer.';
+        }
+      }, 1000);
+    });
 
-function toggleSpeech(){
-    speechEnabled = !speechEnabled;
-    document.getElementById("sound-button").textContent = speechEnabled ? "🔊 Voice on" : "🔇 Voice off";
-    if(!speechEnabled && "speechSynthesis" in window) window.speechSynthesis.cancel();
-    voiceStatus.textContent = speechEnabled ? "Coach replies can be read aloud" : "Voice replies are off";
-}
+    nextQuestion.addEventListener('click', () => {
+      promptIndex = (promptIndex + 1) % prompts.length;
+      promptElement.textContent = prompts[promptIndex];
+      resetTimer('New prompt ready. Speak aloud, or plan a short answer before you begin.');
+    });
 
-function startRecognition(){
-    if(!SpeechRecognition) return;
-    if(micButton.classList.contains("listening") && recognition) return;
-    micButton.disabled = true;
-    recognition = new SpeechRecognition();
-    recognition.lang = "en-US";
-    recognition.continuous = false;
-    recognition.interimResults = false;
-    recognition.maxAlternatives = 1;
-    recognition.onstart = () => { micButton.disabled = false; micButton.classList.add("listening"); micButton.textContent = "🔴 Listening…"; voiceStatus.textContent = "Listening in English… speak now. Tap again to stop."; };
-    recognition.onresult = event => { const transcript = event.results[0][0].transcript.trim(); if(transcript){userInput.value = transcript; sendMessage();} else voiceStatus.textContent = "I didn't catch any words. Tap the microphone and try again."; };
-    recognition.onnomatch = () => { voiceStatus.textContent = "I couldn't understand that. Try speaking a little more slowly."; };
-    recognition.onerror = event => {
-        const errors = {
-            "not-allowed": "Microphone permission is blocked. Allow it in browser site settings.",
-            "service-not-allowed": "Speech recognition is disabled by this browser. Try Chrome or Edge.",
-            "audio-capture": "No microphone audio was found. Check your microphone connection.",
-            "no-speech": "I didn't hear speech. Tap the microphone and try again.",
-            "network": "The browser's speech service needs an internet connection.",
-            "aborted": "Listening stopped. Tap the microphone to try again."
-        };
-        voiceStatus.textContent = errors[event.error] || "Speech recognition stopped. Check microphone permission and try again.";
-        if(part1Active) part1AutoListen = false;
-    };
-    recognition.onend = () => { micButton.disabled = false; micButton.classList.remove("listening"); micButton.textContent = "🎙 Speak"; };
-    try { recognition.start(); } catch(error) { micButton.disabled = false; voiceStatus.textContent = "Listening could not start. Close other voice input and try again."; }
-}
-
-async function startListening(){
-    if(micButton.classList.contains("listening") && recognition){
-        recognition.stop();
-        voiceStatus.textContent = "Listening stopped.";
-        return;
-    }
-    const ready = await requestMicrophone();
-    if(ready) startRecognition();
-}
-
-function sendMessage(){
-    const text =
-        userInput.value.trim();
-
-    if(!text) return;
-
-    addMessage(text,"user");
-
-    userInput.value="";
-
-    if(part1Active){
-        part1Answers.push(text);
-        const typing = showTyping();
-        setTimeout(()=>{ typing.remove(); askPart1Question(); }, 550);
-        return;
+    const revealItems = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      revealItems.forEach((item) => revealObserver.observe(item));
+    } else {
+      revealItems.forEach((item) => item.classList.add('is-visible'));
     }
 
-    if(levelCheckActive){
-        levelAnswers.push(text);
-        const typing = showTyping();
-        setTimeout(()=>{ typing.remove(); askLevelQuestion(); }, 650);
-        return;
-    }
-    const reply = coachReply(text);
-    const typing = showTyping();
-    setTimeout(()=>{ typing.remove(); addMessage(reply,"ai"); speakText(reply); },650);
-}
+    const chatPanel = document.getElementById('chat-panel');
+    const chatLauncher = document.getElementById('chat-launcher');
+    const chatClose = document.getElementById('chat-close');
+    const chatLog = document.getElementById('chat-log');
+    const chatForm = document.getElementById('chat-form');
+    const chatInput = document.getElementById('chat-input');
+    const chatSend = document.getElementById('chat-send');
+    const chatSuggestions = document.getElementById('chat-suggestions');
+    const chatHistory = [];
+    let chatBusy = false;
 
-
-function sendQuick(text){
-
-    userInput.value = text;
-    sendMessage();
-}
-
-
-function handleKeyPress(e){
-
-    if(e.key==="Enter"){
-
-        sendMessage();
-
+    function openChat() {
+      chatPanel.hidden = false;
+      chatLauncher.hidden = true;
+      chatLauncher.setAttribute('aria-expanded', 'true');
+      chatInput.focus();
     }
 
-}
-
-
-/* =========================
-   SPEAKING PRACTICE
-========================= */
-
-const questions = [
-
-    "Describe a skill you would like to learn.",
-
-    "Describe a person who has influenced you.",
-
-    "Describe a memorable trip you have taken.",
-
-    "Describe a useful piece of technology.",
-
-    "Describe a book or film you enjoyed."
-
-];
-
-let currentQuestion=0;
-
-
-function evaluateAnswer(){
-
-    const answer =
-        document.getElementById("answer").value.trim();
-
-    const evaluation =
-        document.getElementById("evaluation");
-
-    if(answer.length<30){
-
-        evaluation.innerText =
-        "⚠️ Try to give a longer answer. Add a reason, example and personal detail.";
-
-        return;
-
+    function closeChat() {
+      chatPanel.hidden = true;
+      chatLauncher.hidden = false;
+      chatLauncher.setAttribute('aria-expanded', 'false');
+      chatLauncher.focus();
     }
 
-    const words =
-        answer.split(/\s+/).length;
-
-    if(words<70){
-
-        evaluation.innerText =
-        `📊 ${words} words. Good start! Try developing your answer with more details and examples.`;
-
-    }else{
-
-        evaluation.innerText =
-        `📊 ${words} words. Nice! Your answer has enough content to practise fluency. Try checking grammar, linking words and pronunciation next.`;
-
+    function addChatBubble(role, text, extraClass) {
+      const bubble = document.createElement('div');
+      bubble.className = 'chat-bubble' + (role === 'user' ? ' user' : '') + (extraClass ? ' ' + extraClass : '');
+      bubble.textContent = text;
+      chatLog.appendChild(bubble);
+      chatLog.scrollTop = chatLog.scrollHeight;
+      return bubble;
     }
 
-}
+    chatLauncher.addEventListener('click', openChat);
+    chatClose.addEventListener('click', closeChat);
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !chatPanel.hidden) closeChat();
+    });
 
+    chatSuggestions.addEventListener('click', (event) => {
+      const suggestion = event.target.closest('.chat-suggestion');
+      if (suggestion && !chatBusy) {
+        chatInput.value = suggestion.textContent === 'Check my English'
+          ? 'Can you check my English and suggest a more natural version?'
+          : 'Give me an IELTS Speaking practice question.';
+        chatForm.requestSubmit();
+      }
+    });
 
-function nextQuestion(){
-    currentQuestion = (currentQuestion + 1) % questions.length;
-    document.getElementById("question").innerText = questions[currentQuestion];
-    document.getElementById("answer").value = "";
-    document.getElementById("evaluation").innerText = "";
-}
+    chatForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const message = chatInput.value.trim();
+      if (!message || chatBusy) return;
 
+      chatSuggestions.hidden = true;
+      chatBusy = true;
+      chatSend.disabled = true;
+      chatInput.disabled = true;
+      chatHistory.push({ role: 'user', content: message });
+      addChatBubble('user', message);
+      chatInput.value = '';
+      const pending = addChatBubble('assistant', 'Thinking…', 'pending');
 
-/* =========================
-   SCROLL ANIMATION
-========================= */
-
-const observer =
-    new IntersectionObserver(
-        entries=>{
-
-            entries.forEach(entry=>{
-
-                if(entry.isIntersecting){
-
-                    entry.target.style.opacity="1";
-
-                    entry.target.style.transform=
-                        "translateY(0)";
-
-                }
-
-            });
-
-        },
-        {threshold:.1}
-    );
-
-
-document
-.querySelectorAll(".card,.strategy,.step,.experiment-box,.chart-box,.practice-card")
-.forEach(el=>{
-
-    el.style.opacity="0";
-
-    el.style.transform="translateY(25px)";
-
-    el.style.transition="all .7s ease";
-
-    observer.observe(el);
-
-});
-
-</script>
-
+      try {
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ messages: chatHistory.slice(-12) })
+        });
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          throw new Error(result.error || 'The AI service is not available yet.');
+        }
+        if (typeof result.reply !== 'string' || !result.reply.trim()) {
+          throw new Error('The AI service returned an empty reply. Please try again.');
+        }
+        pending.remove();
+        chatHistory.push({ role: 'assistant', content: result.reply });
+        addChatBubble('assistant', result.reply);
+      } catch (error) {
+        pending.remove();
+        const unavailable = error instanceof TypeError
+          ? 'I can’t reach the AI service from this page yet. The website needs to run on its server with the AI connection enabled.'
+          : error.message;
+        addChatBubble('assistant', unavailable);
+      } finally {
+        chatBusy = false;
+        chatSend.disabled = false;
+        chatInput.disabled = false;
+        chatInput.focus();
+      }
+    });
+  </script>
 </body>
 </html>
 
