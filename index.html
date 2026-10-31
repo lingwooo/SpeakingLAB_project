@@ -1069,7 +1069,11 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ messages: chatHistory.slice(-12) })
         });
-        const result = await response.json().catch(() => ({}));
+        const contentType = response.headers.get('content-type') || '';
+        if (!contentType.toLowerCase().includes('application/json')) {
+          throw new Error('This page is hosted on GitHub Pages, which cannot run the AI chat server. Deploy the full SpeakUp site as a Node.js web service and add OPENAI_API_KEY in its private settings to enable the coach.');
+        }
+        const result = await response.json();
         if (!response.ok) {
           throw new Error(result.error || 'The AI service is not available yet.');
         }
@@ -1082,7 +1086,7 @@
       } catch (error) {
         pending.remove();
         const unavailable = error instanceof TypeError
-          ? 'I can’t reach the AI service from this page yet. The website needs to run on its server with the AI connection enabled.'
+          ? 'I can’t reach the AI server. The public GitHub Pages copy cannot run chat; open the Node-hosted SpeakUp site after its server and private API key are configured.'
           : error.message;
         addChatBubble('assistant', unavailable);
       } finally {
