@@ -1,5 +1,7 @@
 # SpeakUp Research
 
+**Open the website:** https://lingwooo.github.io/SpeakingLAB_project/
+
 A responsive research website about teenagers’ IELTS Speaking difficulties, learning preferences, confidence, and four speaking practice strategies. It includes a speaking prompt and an AI practice coach.
 
 ## Publish the website with the AI coach
