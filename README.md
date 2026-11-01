@@ -1,16 +1,18 @@
 # SpeakUp Research
 
-**Open the website:** https://lingwooo.github.io/SpeakingLAB_project/
+**Open the live website:** https://speakup-research-ielts.onrender.com/
+
+The GitHub Pages copy is static and cannot run the AI chat server: https://lingwooo.github.io/SpeakingLAB_project/
 
 A responsive research website about teenagers’ IELTS Speaking difficulties, learning preferences, confidence, and four speaking practice strategies. It includes a speaking prompt and an AI practice coach.
 
 ## Publish the website with the AI coach
 
-GitHub Pages can display the website, but it cannot run the Node.js server required by the chat. This repository includes `render.yaml` so the full site and chat server can be deployed together as a Render web service.
+The full website is deployed as a Render Node.js web service. The AI chat server is running, but it needs an `OPENAI_API_KEY` secret before it can generate replies.
 
-1. In Render, create a new **Blueprint** and connect the public repository `lingwooo/SpeakingLAB_project`.
-2. During setup, provide `OPENAI_API_KEY` in Render’s private environment-variable prompt. Keep this key out of the website files, GitHub, and public messages.
-3. Deploy the service and open the website URL Render gives you. The AI chat works on that Node-hosted URL, not on the GitHub Pages URL.
+1. Open the `speakup-research-ielts` service in Render and go to **Environment**.
+2. Add `OPENAI_API_KEY` as a private environment variable. Keep the key out of the website files, GitHub, and public messages.
+3. Save and redeploy, then use the live website link above. GitHub Pages cannot run the chat server.
 
 The OpenAI API may incur usage charges. Set an appropriate usage limit for the API project before sharing the chat publicly.
 
