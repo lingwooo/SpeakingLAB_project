@@ -388,9 +388,14 @@
     .strategy-note { margin: 21px 0 0; color: #d0dfd5; font-size: 12px; }
 
     .practice-section { padding-block: 90px; }
-    .practice-grid { display: grid; grid-template-columns: .8fr 1.2fr; align-items: center; gap: 70px; }
+    .practice-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr); align-items: start; gap: 16px; }
+    .practice-main { display: grid; gap: 18px; align-content: start; }
     .practice-copy p { color: var(--muted); }
     .practice-copy .small-note { margin-top: 18px; color: #77827c; font-size: 11px; }
+    .practice-heading { max-width: 760px; margin: 0 auto 38px; text-align: center; }
+    .practice-heading .section-lead { margin-inline: auto; }
+    .practice-main .practice-heading { margin: 0; text-align: left; }
+    .practice-main .practice-heading .section-lead { margin-inline: 0; }
     .practice-card {
       padding: clamp(24px, 4vw, 38px);
       border: 1px solid #e4e2d8;
@@ -400,9 +405,14 @@
     }
     .practice-topline { display: flex; align-items: center; justify-content: space-between; gap: 14px; color: var(--green); font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
     .practice-topline span:last-child { color: #78847e; font-size: 10px; letter-spacing: .06em; }
-    .practice-question { min-height: 76px; margin: 20px 0 24px; font-family: Georgia, serif; font-size: clamp(23px, 3vw, 31px); font-weight: 500; letter-spacing: -.03em; line-height: 1.3; }
+    .practice-label { display: block; margin: 22px 0 7px; color: #66726c; font-size: 11px; font-weight: 750; }
+    .practice-select { width: 100%; min-height: 43px; padding: 0 12px; border: 1px solid #dce1d9; border-radius: 11px; background: #fbfcf9; color: var(--ink); font: inherit; font-size: 12px; }
+    .part-hint { min-height: 20px; margin: 8px 0 0; color: #758079; font-size: 11px; }
+    .practice-question { min-height: 104px; margin: 18px 0 23px; font-family: Georgia, serif; font-size: clamp(23px, 3vw, 31px); font-weight: 500; letter-spacing: -.03em; line-height: 1.3; }
     .practice-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
     .practice-controls .button { min-height: 42px; font-size: 12px; cursor: pointer; }
+    .practice-controls .button:disabled { cursor: wait; opacity: .6; }
+    .favorite-button.is-saved { border-color: #d9b970; background: #f8f1df; color: #785b1f; }
     .timer {
       display: inline-flex;
       min-width: 72px;
@@ -417,10 +427,33 @@
       font-size: 14px;
       font-weight: 800;
     }
-    .practice-status { min-height: 22px; margin: 12px 0 0; color: #6d7973; font-size: 11px; }
-    .self-check { display: flex; flex-wrap: wrap; gap: 8px 15px; margin-top: 20px; padding-top: 17px; border-top: 1px solid #e8e8df; color: #61706a; font-size: 11px; }
-    .self-check strong { width: 100%; color: var(--ink); }
-    .self-check span::before { margin-right: 6px; color: var(--coral); content: "•"; }
+    .timer-label { color: #758079; font-size: 10px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+    .practice-status { min-height: 24px; margin: 13px 0 0; color: #6d7973; font-size: 11px; }
+    .self-check { display: flex; flex-wrap: wrap; gap: 8px 14px; margin-top: 16px; padding: 14px; border-radius: 12px; background: #f3f5ef; color: #68766f; font-size: 10px; }
+    .self-check strong { flex-basis: 100%; color: var(--green-dark); font-size: 11px; }
+    .self-check span::before { content: '✓'; margin-right: 5px; color: var(--green); font-weight: 800; }
+    .practice-side { display: flex; flex-direction: column; gap: 14px; }
+    .tool-card { padding: 22px; border: 1px solid #e4e2d8; border-radius: 17px; background: var(--surface); }
+    .tool-card-kicker { margin-bottom: 8px; color: var(--green); font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .tool-card h3 { margin-bottom: 9px; font-family: Georgia, serif; font-size: 22px; font-weight: 500; letter-spacing: -.025em; }
+    .tool-card-copy { margin-bottom: 14px; color: #6b7771; font-size: 11px; line-height: 1.55; }
+    .practice-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 16px 0; }
+    .practice-stat { padding: 12px; border-radius: 12px; background: #f1f5ef; }
+    .practice-stat strong { display: block; color: var(--green-dark); font-family: Georgia, serif; font-size: 25px; font-weight: 500; line-height: 1.1; }
+    .practice-stat span { color: #6b7771; font-size: 10px; }
+    .progress-track { height: 8px; overflow: hidden; border-radius: 999px; background: #e8ece5; }
+    .progress-fill { width: 0; height: 100%; border-radius: inherit; background: var(--coral); transition: width .25s ease; }
+    .progress-caption { margin: 8px 0 14px; color: #6b7771; font-size: 10px; }
+    .task-list { display: grid; gap: 9px; }
+    .task-row { display: flex; align-items: start; gap: 9px; color: #53615a; font-size: 11px; line-height: 1.45; cursor: pointer; }
+    .task-row input { width: 15px; height: 15px; flex: 0 0 15px; margin: 1px 0 0; accent-color: var(--green); }
+    .phrase-text { min-height: 65px; margin: 13px 0 8px; color: var(--green-dark); font-family: Georgia, serif; font-size: 22px; line-height: 1.35; }
+    .phrase-use { min-height: 34px; margin: 0 0 15px; color: #718078; font-size: 10px; line-height: 1.55; }
+    .saved-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+    .saved-empty { margin: 0; color: #77827c; font-size: 11px; }
+    .saved-item { display: flex; align-items: start; justify-content: space-between; gap: 8px; padding: 9px 10px; border-radius: 10px; background: #f3f5ef; color: #485750; font-size: 10px; line-height: 1.45; }
+    .saved-item button { flex: 0 0 auto; padding: 1px 5px; border: 0; background: transparent; color: #748078; cursor: pointer; font-size: 16px; line-height: 1; }
+    .local-note { margin: 12px 0 0; color: #839088; font-size: 9px; line-height: 1.45; }
 
     .conclusion { padding: 82px 0 90px; background: #efece2; }
     .conclusion-inner { display: grid; grid-template-columns: .7fr 1.3fr; gap: 60px; align-items: start; }
@@ -435,139 +468,6 @@
     .footer-copy p { margin: 5px 0 0; }
 
     [hidden] { display: none !important; }
-    .chat-widget {
-      position: fixed;
-      z-index: 30;
-      right: 22px;
-      bottom: 22px;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 12px;
-    }
-    .chat-launcher {
-      display: inline-flex;
-      min-height: 52px;
-      align-items: center;
-      gap: 10px;
-      padding: 0 18px;
-      border: 0;
-      border-radius: 999px;
-      background: var(--green);
-      color: white;
-      box-shadow: 0 12px 32px rgba(24, 63, 55, .26);
-      cursor: pointer;
-      font-size: 13px;
-      font-weight: 750;
-      transition: transform .2s ease, background .2s ease;
-    }
-    .chat-launcher:hover { transform: translateY(-2px); background: var(--green-dark); }
-    .chat-launcher-icon { display: grid; width: 27px; height: 27px; place-items: center; border-radius: 50%; background: rgba(255,255,255,.17); font-size: 15px; }
-    .chat-panel {
-      display: flex;
-      width: min(390px, calc(100vw - 36px));
-      height: min(580px, calc(100dvh - 100px));
-      min-height: 370px;
-      flex-direction: column;
-      overflow: hidden;
-      border: 1px solid rgba(32, 45, 43, .12);
-      border-radius: 20px;
-      background: var(--surface);
-      box-shadow: 0 20px 70px rgba(20, 40, 34, .23);
-    }
-    .chat-header {
-      display: flex;
-      min-height: 70px;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 13px 16px;
-      background: var(--green-dark);
-      color: white;
-    }
-    .chat-heading { display: flex; align-items: center; gap: 11px; }
-    .chat-avatar { display: grid; width: 39px; height: 39px; place-items: center; border: 1px solid rgba(255,255,255,.25); border-radius: 13px; background: rgba(255,255,255,.12); font-family: Georgia, serif; font-size: 20px; }
-    .chat-heading strong { display: block; font-size: 14px; }
-    .chat-heading small { display: block; color: #d6e4dc; font-size: 10px; }
-    .chat-close {
-      display: grid;
-      width: 34px;
-      height: 34px;
-      place-items: center;
-      border: 1px solid rgba(255,255,255,.22);
-      border-radius: 10px;
-      background: transparent;
-      color: white;
-      cursor: pointer;
-      font-size: 19px;
-    }
-    .chat-log {
-      display: flex;
-      flex: 1;
-      flex-direction: column;
-      gap: 10px;
-      overflow-y: auto;
-      padding: 16px 14px;
-      background: #f8f8f3;
-      scroll-behavior: smooth;
-    }
-    .chat-bubble {
-      max-width: 88%;
-      padding: 11px 13px;
-      border: 1px solid #e6e8df;
-      border-radius: 14px 14px 14px 4px;
-      background: white;
-      color: #33413b;
-      font-size: 12px;
-      line-height: 1.55;
-      white-space: pre-wrap;
-      overflow-wrap: anywhere;
-    }
-    .chat-bubble.user {
-      align-self: flex-end;
-      border-color: var(--green);
-      border-radius: 14px 14px 4px 14px;
-      background: var(--green);
-      color: white;
-    }
-    .chat-bubble.pending { color: #65736c; font-style: italic; }
-    .chat-suggestions { display: flex; flex-wrap: wrap; gap: 7px; padding: 0 13px 12px; background: #f8f8f3; }
-    .chat-suggestion {
-      padding: 7px 10px;
-      border: 1px solid #dce5dc;
-      border-radius: 999px;
-      background: white;
-      color: var(--green-dark);
-      cursor: pointer;
-      font-size: 10px;
-      font-weight: 700;
-    }
-    .chat-suggestion:hover { background: var(--green-soft); }
-    .chat-form { display: flex; gap: 8px; padding: 12px; border-top: 1px solid #e8e8df; background: white; }
-    .chat-input {
-      width: 100%;
-      min-width: 0;
-      min-height: 43px;
-      padding: 10px 12px;
-      border: 1px solid #dce1d9;
-      border-radius: 12px;
-      background: #fbfcf9;
-      color: var(--ink);
-      font-size: 12px;
-    }
-    .chat-send {
-      flex: 0 0 44px;
-      width: 44px;
-      border: 0;
-      border-radius: 12px;
-      background: var(--green);
-      color: white;
-      cursor: pointer;
-      font-size: 18px;
-    }
-    .chat-send:disabled { cursor: wait; opacity: .55; }
-    .chat-privacy { margin: 0; padding: 0 13px 11px; background: white; color: #758079; font-size: 9px; line-height: 1.45; }
-    .chat-privacy a { color: var(--green-dark); }
 
     .js .reveal { opacity: 0; transform: translateY(16px); transition: opacity .65s ease, transform .65s ease; }
     .js .reveal.is-visible { opacity: 1; transform: translateY(0); }
@@ -582,7 +482,7 @@
       .hero-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
       .hero-visual { min-height: 450px; }
       .aim-layout, .analysis-grid { gap: 42px; }
-      .practice-grid { gap: 40px; }
+      .practice-grid { grid-template-columns: 1fr; gap: 16px; }
     }
     @media (max-width: 740px) {
       .container { width: min(100% - 36px, var(--content)); }
@@ -623,8 +523,6 @@
       .conclusion-inner { gap: 20px; }
       .conclusion-stamp { width: 66px; height: 66px; font-size: 21px; }
       .footer-inner { flex-direction: column; gap: 10px; }
-      .chat-widget { right: 12px; bottom: 12px; }
-      .chat-panel { width: min(390px, calc(100vw - 24px)); height: min(640px, calc(100dvh - 85px)); }
     }
     @media (max-width: 480px) {
       .container { width: calc(100% - 30px); }
@@ -830,26 +728,75 @@
 
     <section class="practice-section section" id="practice">
       <div class="container practice-grid">
-        <div class="practice-copy reveal">
-          <p class="kicker">A small practice break</p>
-          <h2>Take a moment to speak.</h2>
-          <p>Try an IELTS-style speaking prompt. Use the timer if it helps you practise answering aloud, then reflect on your response.</p>
-          <p class="small-note">This optional activity is separate from the research questionnaire and results.</p>
-        </div>
-        <div class="practice-card reveal">
-          <div class="practice-topline"><span>Speaking prompt</span><span>Practice activity</span></div>
-          <h3 class="practice-question" id="practice-question">What do you enjoy doing in your free time?</h3>
-          <div class="practice-controls">
-            <span class="timer" id="timer" aria-label="60 seconds remaining">01:00</span>
-            <button class="button button-primary" type="button" id="timer-toggle">Start 60-second timer</button>
-            <button class="button button-secondary" type="button" id="next-question">Try another question</button>
+        <div class="practice-main">
+          <div class="practice-copy practice-heading reveal">
+            <p class="kicker">Free IELTS speaking practice</p>
+            <h2>Build confidence, one answer at a time.</h2>
+            <p class="section-lead">Choose a Speaking part, try a fresh prompt and practise at your own pace. These optional tools are separate from the research questionnaire and its findings.</p>
           </div>
-          <p class="practice-status" id="practice-status" aria-live="polite">Speak aloud, or plan a short answer before you begin.</p>
-          <div class="self-check" aria-label="Reflection prompts">
-            <strong>After you answer, reflect:</strong>
-            <span>Did I explain my idea?</span><span>Did I give an example?</span><span>What would I practise next?</span>
+          <div class="practice-card reveal">
+            <div class="practice-topline"><span>Speaking prompt</span><span id="practice-part-label">Part 1 · Interview</span></div>
+            <label class="practice-label" for="practice-part">Choose a practice part</label>
+            <select class="practice-select" id="practice-part">
+              <option value="part1">Part 1 · Interview</option>
+              <option value="part2">Part 2 · Long turn</option>
+              <option value="part3">Part 3 · Discussion</option>
+            </select>
+            <p class="part-hint" id="part-hint">Short questions about familiar topics. Aim to answer in a few complete sentences.</p>
+            <h3 class="practice-question" id="practice-question">What do you enjoy doing in your free time?</h3>
+            <div class="practice-controls">
+              <span class="timer" id="timer" aria-label="30 seconds remaining">00:30</span>
+              <button class="button button-primary" type="button" id="timer-toggle">Start 30-second timer</button>
+              <button class="button button-secondary" type="button" id="next-question">Try another</button>
+              <button class="button button-secondary favorite-button" type="button" id="favorite-toggle" aria-pressed="false">♡ Save question</button>
+            </div>
+            <p class="practice-status" id="practice-status" aria-live="polite">Answer aloud. Add a reason or a small example to develop your idea.</p>
+            <div class="self-check" aria-label="Reflection prompts">
+              <strong>After you answer, reflect:</strong>
+              <span>Did I explain my idea?</span><span>Did I give an example?</span><span>What would I practise next?</span>
+            </div>
           </div>
         </div>
+        <aside class="practice-side" aria-label="Personal practice tools">
+          <section class="tool-card" aria-labelledby="progress-title">
+            <p class="tool-card-kicker">Your practice</p>
+            <h3 id="progress-title">Small steps add up.</h3>
+            <p class="tool-card-copy">Keep a simple record of the answers you practise on this device.</p>
+            <div class="practice-stats">
+              <div class="practice-stat"><strong id="today-count">0</strong><span>today</span></div>
+              <div class="practice-stat"><strong id="total-count">0</strong><span>all time</span></div>
+            </div>
+            <button class="button button-primary" type="button" id="mark-practised">✓ I practised this</button>
+            <p class="local-note">Your progress stays in this browser.</p>
+          </section>
+
+          <section class="tool-card" aria-labelledby="plan-title">
+            <p class="tool-card-kicker">A gentle daily plan</p>
+            <h3 id="plan-title">Four quick habits.</h3>
+            <div class="progress-track" role="progressbar" id="daily-progress" aria-label="Daily plan progress" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0"><div class="progress-fill" id="daily-progress-fill"></div></div>
+            <p class="progress-caption" id="daily-progress-caption">0 of 4 complete</p>
+            <div class="task-list" id="task-list">
+              <label class="task-row"><input type="checkbox" data-task="0">Answer one Part 1 question aloud</label>
+              <label class="task-row"><input type="checkbox" data-task="1">Plan a Part 2 cue card</label>
+              <label class="task-row"><input type="checkbox" data-task="2">Try one new linking phrase</label>
+              <label class="task-row"><input type="checkbox" data-task="3">Listen back to a short recording</label>
+            </div>
+          </section>
+
+          <section class="tool-card" aria-labelledby="saved-title">
+            <p class="tool-card-kicker">Your collection</p>
+            <h3 id="saved-title">Saved questions</h3>
+            <ul class="saved-list" id="saved-list" aria-live="polite"><li class="saved-empty">Save a prompt you want to revisit.</li></ul>
+          </section>
+
+          <section class="tool-card" aria-labelledby="phrase-title">
+            <p class="tool-card-kicker">Speaking toolkit</p>
+            <h3 id="phrase-title">A phrase to try</h3>
+            <p class="phrase-text" id="phrase-text">One thing I really enjoy is…</p>
+            <p class="phrase-use" id="phrase-use">Use it to introduce a hobby, activity or preference.</p>
+            <button class="button button-secondary" type="button" id="next-phrase">Show another phrase</button>
+          </section>
+        </aside>
       </div>
     </section>
 
@@ -865,34 +812,6 @@
       </div>
     </section>
   </main>
-
-  <div class="chat-widget" id="chat-widget">
-    <section class="chat-panel" id="chat-panel" aria-labelledby="chat-title" hidden>
-      <header class="chat-header">
-        <div class="chat-heading">
-          <span class="chat-avatar" aria-hidden="true">S</span>
-          <span><strong id="chat-title">SpeakUp AI</strong><small>IELTS speaking practice</small></span>
-        </div>
-        <button class="chat-close" id="chat-close" type="button" aria-label="Close chat">×</button>
-      </header>
-      <div class="chat-log" id="chat-log" role="log" aria-label="Conversation" aria-live="polite" aria-relevant="additions">
-        <div class="chat-bubble">Hi! I’m your SpeakUp practice coach. Ask me about IELTS Speaking, practise an answer, or send me a sentence for feedback.</div>
-      </div>
-      <div class="chat-suggestions" id="chat-suggestions" aria-label="Suggested messages">
-        <button class="chat-suggestion" type="button">Give me a speaking question</button>
-        <button class="chat-suggestion" type="button">Check my English</button>
-      </div>
-      <form class="chat-form" id="chat-form">
-        <label class="skip-link" for="chat-input">Message SpeakUp AI</label>
-        <input class="chat-input" id="chat-input" type="text" maxlength="1500" autocomplete="off" placeholder="Type your message…" required>
-        <button class="chat-send" id="chat-send" type="submit" aria-label="Send message">↑</button>
-      </form>
-      <p class="chat-privacy">AI replies may be inaccurate. Don’t share personal information. Messages are sent to the AI service to generate replies.</p>
-    </section>
-    <button class="chat-launcher" id="chat-launcher" type="button" aria-expanded="false" aria-controls="chat-panel">
-      <span class="chat-launcher-icon" aria-hidden="true">✦</span><span>Talk to SpeakUp AI</span>
-    </button>
-  </div>
 
   <footer class="site-footer">
     <div class="container footer-inner">
@@ -923,20 +842,94 @@
       });
     });
 
-    const prompts = [
-      'What do you enjoy doing in your free time?',
-      'Do you prefer studying alone or with other people? Why?',
-      'What is something new you would like to learn?',
-      'Tell me about a place where you like to spend time.'
-    ];
+    const promptSets = {
+      part1: {
+        label: 'Part 1 · Interview',
+        hint: 'Short questions about familiar topics. Aim to answer in a few complete sentences.',
+        duration: 30,
+        prompts: [
+          'What do you enjoy doing in your free time?',
+          'Do you prefer studying alone or with other people? Why?',
+          'What kind of music do you like listening to?',
+          'How do you usually spend your weekends?',
+          'What is your favourite place in your town?',
+          'Do you enjoy reading? What kinds of books do you like?',
+          'How do you usually travel to school or work?',
+          'What is something new you would like to learn?'
+        ]
+      },
+      part2: {
+        label: 'Part 2 · Long turn',
+        hint: 'Take one minute to prepare, then speak for up to two minutes. Make brief notes if you like.',
+        duration: 60,
+        prompts: [
+          'Describe a person who has taught you something important. You should say who the person is, what they taught you, how they taught you, and explain why it was important.',
+          'Describe a place where you enjoy spending time. You should say where it is, when you go there, what you do there, and explain why you enjoy it.',
+          'Describe a skill you would like to learn. You should say what it is, how you could learn it, why you are interested in it, and explain how it might be useful.',
+          'Describe a memorable day in your life. You should say when it was, where you were, what happened, and explain why you remember it.',
+          'Describe a book, film or story you enjoyed. You should say what it was about, when you experienced it, what you liked about it, and explain why you remember it.',
+          'Describe a time you helped someone. You should say who you helped, what the situation was, what you did, and explain how you felt afterwards.'
+        ]
+      },
+      part3: {
+        label: 'Part 3 · Discussion',
+        hint: 'Explore broader ideas. Give a clear opinion, explain your reasons and add an example.',
+        duration: 60,
+        prompts: [
+          'Why do some people find it easier to learn new skills than others?',
+          'How has technology changed the way people learn?',
+          'Do you think young people and older people spend their free time differently?',
+          'What qualities make someone a good teacher?',
+          'Why is it useful for people to learn things outside school?',
+          'How can communities encourage people to take part in group activities?',
+          'Do people have more opportunities to travel now than in the past?',
+          'Why do some people prefer learning with others instead of alone?'
+        ]
+      }
+    };
     const promptElement = document.getElementById('practice-question');
+    const partSelect = document.getElementById('practice-part');
+    const partLabel = document.getElementById('practice-part-label');
+    const partHint = document.getElementById('part-hint');
     const timerElement = document.getElementById('timer');
     const timerToggle = document.getElementById('timer-toggle');
     const nextQuestion = document.getElementById('next-question');
+    const favoriteToggle = document.getElementById('favorite-toggle');
     const practiceStatus = document.getElementById('practice-status');
-    let remaining = 60;
+    const dayStamp = new Date().toLocaleDateString('en-CA');
+    const storageKey = 'speakup-practice-tools-v1';
+    let currentPrompt = promptSets.part1.prompts[0];
+    let remaining = 30;
     let timerInterval = null;
-    let promptIndex = 0;
+    let timerStage = 'answer';
+    let phraseIndex = 0;
+    const phrases = [
+      ['One thing I really enjoy is…', 'Use it to introduce a hobby, activity or preference.'],
+      ['The main reason is that…', 'Use it to explain why you hold an opinion.'],
+      ['For example, …', 'Add a specific detail to support your answer.'],
+      ['Compared with the past, …', 'Use it to introduce a change over time.'],
+      ['From my point of view, …', 'Start a clear opinion in a discussion.'],
+      ['It depends on the situation, but…', 'Use it when your answer has more than one side.'],
+      ['A good example of this is…', 'Connect your idea to a concrete example.']
+    ];
+
+    function readPracticeState() {
+      let saved = {};
+      try { saved = JSON.parse(localStorage.getItem(storageKey) || '{}') || {}; } catch { saved = {}; }
+      return {
+        day: saved.day === dayStamp ? dayStamp : dayStamp,
+        today: saved.day === dayStamp && Number.isFinite(saved.today) ? saved.today : 0,
+        total: Number.isFinite(saved.total) ? saved.total : 0,
+        tasks: saved.day === dayStamp && Array.isArray(saved.tasks) ? saved.tasks.slice(0, 4) : [false, false, false, false],
+        saved: Array.isArray(saved.saved) ? saved.saved.filter((item) => typeof item === 'string').slice(0, 30) : []
+      };
+    }
+
+    let practiceState = readPracticeState();
+
+    function savePracticeState() {
+      try { localStorage.setItem(storageKey, JSON.stringify(practiceState)); } catch { /* Keep the tools usable if storage is unavailable. */ }
+    }
 
     function displayTime() {
       const minutes = String(Math.floor(remaining / 60)).padStart(2, '0');
@@ -948,12 +941,83 @@
     function resetTimer(message) {
       window.clearInterval(timerInterval);
       timerInterval = null;
-      remaining = 60;
+      timerStage = partSelect.value === 'part2' ? 'prep' : 'answer';
+      remaining = timerStage === 'prep' ? 60 : promptSets[partSelect.value].duration;
       displayTime();
-      timerToggle.textContent = 'Start 60-second timer';
+      timerToggle.textContent = timerStage === 'prep' ? 'Start 1-minute prep' : 'Start ' + remaining + '-second timer';
       practiceStatus.textContent = message;
     }
 
+    function renderFavourite() {
+      const isSaved = practiceState.saved.includes(currentPrompt);
+      favoriteToggle.classList.toggle('is-saved', isSaved);
+      favoriteToggle.setAttribute('aria-pressed', String(isSaved));
+      favoriteToggle.textContent = isSaved ? '♥ Saved' : '♡ Save question';
+    }
+
+    function renderSavedPrompts() {
+      const list = document.getElementById('saved-list');
+      list.replaceChildren();
+      if (!practiceState.saved.length) {
+        const empty = document.createElement('li');
+        empty.className = 'saved-empty';
+        empty.textContent = 'Save a prompt you want to revisit.';
+        list.appendChild(empty);
+        return;
+      }
+      practiceState.saved.forEach((prompt) => {
+        const item = document.createElement('li');
+        item.className = 'saved-item';
+        const text = document.createElement('span');
+        text.textContent = prompt;
+        const remove = document.createElement('button');
+        remove.type = 'button';
+        remove.setAttribute('aria-label', 'Remove saved question');
+        remove.textContent = '×';
+        remove.addEventListener('click', () => {
+          practiceState.saved = practiceState.saved.filter((savedPrompt) => savedPrompt !== prompt);
+          savePracticeState();
+          renderSavedPrompts();
+          renderFavourite();
+        });
+        item.append(text, remove);
+        list.appendChild(item);
+      });
+    }
+
+    function renderProgress() {
+      document.getElementById('today-count').textContent = String(practiceState.today);
+      document.getElementById('total-count').textContent = String(practiceState.total);
+      const completed = practiceState.tasks.filter(Boolean).length;
+      document.getElementById('daily-progress-fill').style.width = (completed / 4 * 100) + '%';
+      document.getElementById('daily-progress').setAttribute('aria-valuenow', String(completed));
+      document.getElementById('daily-progress-caption').textContent = completed + ' of 4 complete';
+      document.querySelectorAll('[data-task]').forEach((checkbox) => {
+        checkbox.checked = Boolean(practiceState.tasks[Number(checkbox.dataset.task)]);
+      });
+    }
+
+    function setPrompt(prompt) {
+      currentPrompt = prompt;
+      promptElement.textContent = prompt;
+      renderFavourite();
+      resetTimer('Prompt ready. Answer aloud and develop your idea with a reason or example.');
+    }
+
+    function selectPrompt() {
+      const part = partSelect.value;
+      const set = promptSets[part];
+      partLabel.textContent = set.label;
+      partHint.textContent = set.hint;
+      let prompt = currentPrompt;
+      while (set.prompts.length > 1 && prompt === currentPrompt) {
+        prompt = set.prompts[Math.floor(Math.random() * set.prompts.length)];
+      }
+      setPrompt(prompt);
+    }
+
+    partSelect.addEventListener('change', selectPrompt);
+    nextQuestion.addEventListener('click', selectPrompt);
     timerToggle.addEventListener('click', () => {
       if (timerInterval) {
         window.clearInterval(timerInterval);
@@ -962,27 +1026,66 @@
         practiceStatus.textContent = 'Timer paused. Continue when you are ready.';
         return;
       }
-      if (remaining === 0) remaining = 60;
+      if (remaining === 0) resetTimer('Timer restarted. Begin when you are ready.');
       timerToggle.textContent = 'Pause timer';
-      practiceStatus.textContent = 'Your practice time is running.';
-      displayTime();
+      practiceStatus.textContent = timerStage === 'prep' ? 'One minute to make a few notes. Your speaking time will start next.' : 'Your speaking time is running.';
       timerInterval = window.setInterval(() => {
         remaining -= 1;
         displayTime();
         if (remaining <= 0) {
-          window.clearInterval(timerInterval);
-          timerInterval = null;
-          timerToggle.textContent = 'Start again';
-          practiceStatus.textContent = 'Time is up. Take a moment to reflect on your answer.';
+          if (partSelect.value === 'part2' && timerStage === 'prep') {
+            timerStage = 'speak';
+            remaining = 120;
+            timerToggle.textContent = 'Pause timer';
+            practiceStatus.textContent = 'Preparation is over. Speak about the cue card for up to two minutes.';
+            displayTime();
+          } else {
+            window.clearInterval(timerInterval);
+            timerInterval = null;
+            timerToggle.textContent = 'Start again';
+            practiceStatus.textContent = 'Time is up. Take a moment to reflect on your answer.';
+          }
         }
       }, 1000);
     });
 
-    nextQuestion.addEventListener('click', () => {
-      promptIndex = (promptIndex + 1) % prompts.length;
-      promptElement.textContent = prompts[promptIndex];
-      resetTimer('New prompt ready. Speak aloud, or plan a short answer before you begin.');
+    favoriteToggle.addEventListener('click', () => {
+      if (practiceState.saved.includes(currentPrompt)) {
+        practiceState.saved = practiceState.saved.filter((prompt) => prompt !== currentPrompt);
+      } else if (practiceState.saved.length < 30) {
+        practiceState.saved.push(currentPrompt);
+      }
+      savePracticeState();
+      renderFavourite();
+      renderSavedPrompts();
     });
+
+    document.getElementById('mark-practised').addEventListener('click', () => {
+      practiceState.today += 1;
+      practiceState.total += 1;
+      savePracticeState();
+      renderProgress();
+      practiceStatus.textContent = 'Nice work. Your practice has been added to today’s progress.';
+    });
+
+    document.getElementById('task-list').addEventListener('change', (event) => {
+      const checkbox = event.target.closest('[data-task]');
+      if (!checkbox) return;
+      practiceState.tasks[Number(checkbox.dataset.task)] = checkbox.checked;
+      savePracticeState();
+      renderProgress();
+    });
+
+    document.getElementById('next-phrase').addEventListener('click', () => {
+      phraseIndex = (phraseIndex + 1 + Math.floor(Math.random() * (phrases.length - 1))) % phrases.length;
+      document.getElementById('phrase-text').textContent = phrases[phraseIndex][0];
+      document.getElementById('phrase-use').textContent = phrases[phraseIndex][1];
+    });
+
+    renderProgress();
+    renderSavedPrompts();
+    renderFavourite();
+    displayTime();
 
     const revealItems = document.querySelectorAll('.reveal');
     if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -999,103 +1102,6 @@
       revealItems.forEach((item) => item.classList.add('is-visible'));
     }
 
-    const chatPanel = document.getElementById('chat-panel');
-    const chatLauncher = document.getElementById('chat-launcher');
-    const chatClose = document.getElementById('chat-close');
-    const chatLog = document.getElementById('chat-log');
-    const chatForm = document.getElementById('chat-form');
-    const chatInput = document.getElementById('chat-input');
-    const chatSend = document.getElementById('chat-send');
-    const chatSuggestions = document.getElementById('chat-suggestions');
-    const chatHistory = [];
-    let chatBusy = false;
-
-    function openChat() {
-      chatPanel.hidden = false;
-      chatLauncher.hidden = true;
-      chatLauncher.setAttribute('aria-expanded', 'true');
-      chatInput.focus();
-    }
-
-    function closeChat() {
-      chatPanel.hidden = true;
-      chatLauncher.hidden = false;
-      chatLauncher.setAttribute('aria-expanded', 'false');
-      chatLauncher.focus();
-    }
-
-    function addChatBubble(role, text, extraClass) {
-      const bubble = document.createElement('div');
-      bubble.className = 'chat-bubble' + (role === 'user' ? ' user' : '') + (extraClass ? ' ' + extraClass : '');
-      bubble.textContent = text;
-      chatLog.appendChild(bubble);
-      chatLog.scrollTop = chatLog.scrollHeight;
-      return bubble;
-    }
-
-    chatLauncher.addEventListener('click', openChat);
-    chatClose.addEventListener('click', closeChat);
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && !chatPanel.hidden) closeChat();
-    });
-
-    chatSuggestions.addEventListener('click', (event) => {
-      const suggestion = event.target.closest('.chat-suggestion');
-      if (suggestion && !chatBusy) {
-        chatInput.value = suggestion.textContent === 'Check my English'
-          ? 'Can you check my English and suggest a more natural version?'
-          : 'Give me an IELTS Speaking practice question.';
-        chatForm.requestSubmit();
-      }
-    });
-
-    chatForm.addEventListener('submit', async (event) => {
-      event.preventDefault();
-      const message = chatInput.value.trim();
-      if (!message || chatBusy) return;
-
-      chatSuggestions.hidden = true;
-      chatBusy = true;
-      chatSend.disabled = true;
-      chatInput.disabled = true;
-      chatHistory.push({ role: 'user', content: message });
-      addChatBubble('user', message);
-      chatInput.value = '';
-      const pending = addChatBubble('assistant', 'Thinking…', 'pending');
-
-      try {
-        const response = await fetch('/api/chat', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ messages: chatHistory.slice(-12) })
-        });
-        const contentType = response.headers.get('content-type') || '';
-        if (!contentType.toLowerCase().includes('application/json')) {
-          throw new Error('This page is hosted on GitHub Pages, which cannot run the AI chat server. Deploy the full SpeakUp site as a Node.js web service and add OPENAI_API_KEY in its private settings to enable the coach.');
-        }
-        const result = await response.json();
-        if (!response.ok) {
-          throw new Error(result.error || 'The AI service is not available yet.');
-        }
-        if (typeof result.reply !== 'string' || !result.reply.trim()) {
-          throw new Error('The AI service returned an empty reply. Please try again.');
-        }
-        pending.remove();
-        chatHistory.push({ role: 'assistant', content: result.reply });
-        addChatBubble('assistant', result.reply);
-      } catch (error) {
-        pending.remove();
-        const unavailable = error instanceof TypeError
-          ? 'I can’t reach the AI server. The public GitHub Pages copy cannot run chat; open the Node-hosted SpeakUp site after its server and private API key are configured.'
-          : error.message;
-        addChatBubble('assistant', unavailable);
-      } finally {
-        chatBusy = false;
-        chatSend.disabled = false;
-        chatInput.disabled = false;
-        chatInput.focus();
-      }
-    });
   </script>
 </body>
 </html>
