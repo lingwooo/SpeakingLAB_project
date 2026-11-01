@@ -1,28 +1,27 @@
 # SpeakUp Research
 
-**Open the live website:** https://speakup-research-ielts.onrender.com/
+**Live website:** https://speakup-research-ielts.onrender.com/
 
-The GitHub Pages copy is static and cannot run the AI chat server: https://lingwooo.github.io/SpeakingLAB_project/
+**GitHub Pages copy:** https://lingwooo.github.io/SpeakingLAB_project/
 
-A responsive research website about teenagers’ IELTS Speaking difficulties, learning preferences, confidence, and four speaking practice strategies. It includes a speaking prompt and an AI practice coach.
+A responsive research website about teenagers’ IELTS Speaking difficulties, learning preferences, confidence, and four practice strategies: shadowing, AI speaking practice, speaking clubs, and self-recording. The site also includes optional, browser-based speaking practice tools.
 
-## Publish the website with the AI coach
+## Practice tools
 
-The full website is deployed as a Render Node.js web service. The AI chat server is running, but it needs an `OPENAI_API_KEY` secret before it can generate replies.
+- IELTS Speaking Part 1, Part 2 and Part 3 prompt collections
+- Timers for short answers, Part 2 preparation and the long turn
+- A daily practice checklist, answer counter and saved prompts
+- A rotating phrase bank for developing spoken answers
 
-1. Open the `speakup-research-ielts` service in Render and go to **Environment**.
-2. Add `OPENAI_API_KEY` as a private environment variable. Keep the key out of the website files, GitHub, and public messages.
-3. Save and redeploy, then use the live website link above. GitHub Pages cannot run the chat server.
-
-The OpenAI API may incur usage charges. Set an appropriate usage limit for the API project before sharing the chat publicly.
+Progress, checklist items and saved prompts are stored in the visitor’s browser. The tools work on both Render and GitHub Pages and do not need an AI service or API key. The Unsplash photographs require an internet connection.
 
 ## Run locally
 
-Install Node.js 22 or later, set `OPENAI_API_KEY` in your local environment, then run:
+Install Node.js 22 or later, then run:
 
 ```sh
-node server.js
+npm start
 ```
 
-Open `http://localhost:3000`. The server sends recent chat messages to the OpenAI Responses API with response storage disabled. Never put the API key in `index.html` or commit it to the repository. The Unsplash photographs require an internet connection.
+Open `http://localhost:3000`.
 
